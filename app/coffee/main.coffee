@@ -91,10 +91,11 @@ require.config
         "oneComponent": "withwire/components/oneComponent"
 
 require [
+    "wire"
     "wire!bootstrapSpec"
     "childSpec"
     "overridden"
-], (bootstrapCTX, childSpec) ->
+], (wire, bootstrapCTX, childSpec) ->
 
     bootstrapCTX.wire(
             childSpec

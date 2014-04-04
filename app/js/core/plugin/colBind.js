@@ -16,8 +16,6 @@ define(["marionette", "when", "backbone.collectionbinder"], function(Marionette,
         if (!bindings) {
           throw new Error('plugin/colBind: "bindings" must be specified');
         }
-        console.log("TARGET", target, options.options.to);
-        console.log("bindings", options.options.bindings);
         rowHtml = "<tr><td data-name='one'></td><td data-name='two'></td></tr>";
         elManagerFactory = new Backbone.CollectionBinder.ElManagerFactory(rowHtml, "data-name");
         collectionBinder = new Backbone.CollectionBinder(elManagerFactory, {
@@ -26,7 +24,6 @@ define(["marionette", "when", "backbone.collectionbinder"], function(Marionette,
         selector = bindings.selector;
         element = target.$el.find(selector);
         collectionBinder.bind(to, element);
-        console.log(">>>>>", target.$el.find(".tbody"));
         return target;
       });
     };
@@ -36,7 +33,6 @@ define(["marionette", "when", "backbone.collectionbinder"], function(Marionette,
     return {
       context: {
         ready: function(resolver, wire) {
-          console.log("plugin READY -----");
           return resolver.resolve();
         }
       },
