@@ -8,8 +8,14 @@ module.exports = (grunt) ->
             coffee_app:
                 files: ['app/coffee/**/**.coffee']
                 tasks: ["coffee-compile-app"]
+            coffee_jasmine:
+                files: ['test/jasmine/coffee/**/**.coffee']
+                tasks: ["coffee-compile-jasmine"]
+            js_requireConfig:
+                files: ["app/js/requireConfig.js", "app/js/main.js", "test/jasmine/SpecRunner.js"]
+                tasks: ["concat:main", "concat:jasmine"]
             js:
-                files: ['app/js/**/**.js']
+                files: ["app/js/**/**.js", "test/jasmine/js/**/**.js"]
                 options:
                     livereload: true
 
@@ -23,6 +29,17 @@ module.exports = (grunt) ->
                     cwd: 'app/coffee',
                     src: ['**/*.coffee'],
                     dest: 'app/js',
+                    ext: '.js'
+                ]
+            jasmine:
+                options: {
+                    bare: true
+                }
+                files: [
+                    expand: true,
+                    cwd: 'test/jasmine/coffee',
+                    src: ['**/*.coffee'],
+                    dest: 'test/jasmine/js',
                     ext: '.js'
                 ]
 
@@ -64,24 +81,13 @@ module.exports = (grunt) ->
                         include: ["main", "wire", 'wire/lib/context']
                     ]
 
-                    # done: (done, output) ->
-                    #     duplicates = require('rjs-build-analysis').duplicates(output)
-
-                    #     if duplicates.length > 0
-                    #         grunt.log.subhead('Duplicates found in requirejs build:')
-                    #         grunt.log.warn(duplicates)
-                    #         done new Error('r.js built duplicate modules, please check the excludes option.')
-                    #     else
-                    #         console.log "No duplicates"
-
-                    #     done()
-
-        # insert:
-        #     options: {}
-        #     main:
-        #         src: "app//coffee/requireConfig.coffee",
-        #         dest: "tests/coffee/SpecRunner.coffee",
-        #         match: "# requirejs-config here"
+        concat:
+            main:
+                src: ["app/js/requireConfig.js", "app/js/main.js"]
+                dest: "app/js/main_with_require_config.js"
+            jasmine:
+                src: ["app/js/requireConfig.js", "test/jasmine/js/SpecRunner.js"]
+                dest: "test/jasmine/js/SpecRunner_with_require_config.js"
 
 
 
@@ -91,17 +97,16 @@ module.exports = (grunt) ->
     grunt.loadNpmTasks "grunt-contrib-clean"
     grunt.loadNpmTasks "grunt-contrib-connect"
     grunt.loadNpmTasks "grunt-contrib-requirejs"
+    grunt.loadNpmTasks "grunt-contrib-concat"
     grunt.loadNpmTasks "grunt-newer"
-
-    # grunt.loadNpmTasks "grunt-insert"
 
     grunt.registerTask "default", ["connect:server", "watch"]
 
     # compilation
     grunt.registerTask "coffee-compile-app", ["newer:coffee:app"]
+    grunt.registerTask "coffee-compile-jasmine", ["newer:coffee:jasmine"]
 
     grunt.registerTask "server", ["connect"]
-    grunt.registerTask "inc", ["insert", "coffee-compile-tests", "default"]
     
     grunt.registerTask 'build', ["prebuild", "requirejs", "afterbuild"]
     grunt.registerTask 'prebuild', ["copy:app"]
