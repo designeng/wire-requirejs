@@ -19,20 +19,38 @@ define [
             # it was
             # return When(wire(initBindOptions(facet.options, options, wire.resolver)),
 
+            # resolver.isRef: https://github.com/cujojs/wire/blob/master/lib/resolver.js
+
             return When(wire({options: facet.options}),
                     (options) ->
-                        to = options.to
-                        throw new Error('wire/cola: "to" must be specified') unless !to
+                        # to = options.to
+                        # throw new Error('wire/cola: "to" must be specified') unless !to
 
                         # addSource must be collection method
                         # to.addSource(target, copyOwnProps(options));
 
                         # options.options.to must be refactored (look at cola!)
+
+                        to = options.options.to
+                        bindings = options.options.bindings
+
+                        throw new Error('plugin/colBind: "to" must be specified') unless to
+                        throw new Error('plugin/colBind: "bindings" must be specified') unless bindings
+
                         console.log "TARGET", target, options.options.to
+                        console.log "bindings", options.options.bindings
 
-                        # here must be binded outer collection to view fields
+                        rowHtml = "<tr><td data-name='one'></td><td data-name='two'></td></tr>"
+                        elManagerFactory = new Backbone.CollectionBinder.ElManagerFactory(rowHtml, "data-name")
+                        collectionBinder = new Backbone.CollectionBinder(elManagerFactory, {autoSort: true})
+                        
+                        selector = bindings.selector
+                        element = target.$el.find(selector)
 
-                        # 
+                        collectionBinder.bind(to, element)
+
+                        console.log ">>>>>", target.$el.find(".tbody")
+                        
                         return target
                 )
 

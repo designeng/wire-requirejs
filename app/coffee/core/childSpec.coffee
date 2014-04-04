@@ -29,5 +29,8 @@ define
             module: "controls/testcontrol/tableBodyControl"
         bind: {
             to: {$ref: 'collection'}
+            bindings: {
+                selector: ".tbody"
+            }
         }
 

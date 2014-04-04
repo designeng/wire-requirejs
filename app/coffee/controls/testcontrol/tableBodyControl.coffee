@@ -3,7 +3,7 @@ define [
 ], (Marionette) ->
 	class TableBodyControl extends Marionette.Layout
 
-		template: "<tr><td>TABLE BODY</td></tr>"
+		template: "<tr><td data-name='one'>...</td><td data-name='two'>...</td></tr>"
 
 		initialize: ->
 			console.log "tableBodyControl inited"

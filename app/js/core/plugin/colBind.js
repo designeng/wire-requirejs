@@ -7,12 +7,26 @@ define(["marionette", "when", "backbone.collectionbinder"], function(Marionette,
       return When(wire({
         options: facet.options
       }), function(options) {
-        var to;
-        to = options.to;
-        if (!!to) {
-          throw new Error('wire/cola: "to" must be specified');
+        var bindings, collectionBinder, elManagerFactory, element, rowHtml, selector, to;
+        to = options.options.to;
+        bindings = options.options.bindings;
+        if (!to) {
+          throw new Error('plugin/colBind: "to" must be specified');
+        }
+        if (!bindings) {
+          throw new Error('plugin/colBind: "bindings" must be specified');
         }
         console.log("TARGET", target, options.options.to);
+        console.log("bindings", options.options.bindings);
+        rowHtml = "<tr><td data-name='one'></td><td data-name='two'></td></tr>";
+        elManagerFactory = new Backbone.CollectionBinder.ElManagerFactory(rowHtml, "data-name");
+        collectionBinder = new Backbone.CollectionBinder(elManagerFactory, {
+          autoSort: true
+        });
+        selector = bindings.selector;
+        element = target.$el.find(selector);
+        collectionBinder.bind(to, element);
+        console.log(">>>>>", target.$el.find(".tbody"));
         return target;
       });
     };

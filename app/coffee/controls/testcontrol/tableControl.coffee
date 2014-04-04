@@ -24,4 +24,4 @@ define [
 			console.log "@tbody", @tbody
 
 			@thead.show @header
-			@tbody.show @body
+			# @tbody.show @body

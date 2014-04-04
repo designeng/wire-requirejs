@@ -11,7 +11,7 @@ define(["marionette"], function(Marionette) {
       return _ref;
     }
 
-    TableBodyControl.prototype.template = "<tr><td>TABLE BODY</td></tr>";
+    TableBodyControl.prototype.template = "<tr><td data-name='one'>...</td><td data-name='two'>...</td></tr>";
 
     TableBodyControl.prototype.initialize = function() {
       return console.log("tableBodyControl inited");

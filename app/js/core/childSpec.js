@@ -38,6 +38,9 @@ define({
     bind: {
       to: {
         $ref: 'collection'
+      },
+      bindings: {
+        selector: ".tbody"
       }
     }
   }

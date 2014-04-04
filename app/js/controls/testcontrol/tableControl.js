@@ -30,8 +30,7 @@ define(["marionette"], function(Marionette) {
     TableControl.prototype.onRender = function() {
       console.log("@thead", this.thead);
       console.log("@tbody", this.tbody);
-      this.thead.show(this.header);
-      return this.tbody.show(this.body);
+      return this.thead.show(this.header);
     };
 
     return TableControl;
