@@ -1,5 +1,15 @@
 define({
   $plugins: ["wire/debug", "wire/connect", "core/plugin/colBind"],
+  $exports: {
+    tableModule: {
+      $ref: 'controller'
+    }
+  },
+  controller: {
+    create: {
+      module: "modules/stats/tableResultController"
+    }
+  },
   collection: {
     create: {
       module: "controls/testcontrol/collection/tableBodyCollection"

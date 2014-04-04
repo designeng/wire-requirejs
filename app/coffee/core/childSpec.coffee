@@ -3,11 +3,15 @@ define
         "wire/debug"
         "wire/connect"
         "core/plugin/colBind"
+        # "core/plugin/colToColBind"
     ]
 
-    # template:
-    #     module: "controls/testcontrol/tpl/tableTpl.html"
+    $exports:
+        tableModule: {$ref: 'controller'}
 
+    controller:
+        create:
+            module: "modules/stats/tableResultController"
 
     collection:
         create:
@@ -27,6 +31,8 @@ define
             to: {$ref: 'collection'}
             bindings:
                 selector: ".tbody"
+        # bind:
+        #     to: {$ref: 'collection'}
 
     headerView:
         create:
