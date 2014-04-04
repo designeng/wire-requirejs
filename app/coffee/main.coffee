@@ -43,6 +43,16 @@ require.config
             name: "marionette"
             main: "backbone.marionette"
             location: "../../bower_components/marionette/lib"
+        },
+        {
+            name: "backbone.modelbinder"
+            main: "Backbone.ModelBinder"
+            location: "../../bower_components/Backbone.ModelBinder"
+        },
+        {
+            name: "backbone.collectionbinder"
+            main: "Backbone.CollectionBinder"
+            location: "../../bower_components/Backbone.ModelBinder"
         },        
         {
             name: "jquery"
@@ -60,6 +70,8 @@ require.config
         "marionette":
             deps: ["backbone"]
             exports: "Marionette"
+        "backbone.collectionbinder":
+            deps: ["backbone.modelbinder"]
 
     paths:
         # plugins

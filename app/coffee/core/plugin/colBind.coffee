@@ -1,49 +1,10 @@
 define [
     "marionette"
-], (Marionette) ->
+    "when"
+    "backbone.collectionbinder"
+], (Marionette, When) ->
 
     return (options) ->
-
-        # list all existing Backbone routes 
-        currentContext = null
-
-        createRouter = (componentDefinition, wire) ->
-            # Did user supply a new routerclass (instead of Backbone default)
-            When.promise (resolve) ->
-                if componentDefinition.options.routerModule
-                    # instantiate new class 
-                    wire.loadModule(componentDefinition.options.routerModule).then (Module) ->
-                        tempRouter = new Module
-                        resolve tempRouter
-                    , (error) ->
-                        console.error error
-                else
-                    # using default Backbone router
-                    tempRouter = new Backbone.Router()
-                    resolve tempRouter
-
-        # TODO: Also clear destroy inner modules
-        routeBinding = (tempRouter, componentDefinition, wire) ->
-            for route, spec of componentDefinition.options.routes
-                routeFn = ((spec) ->
-                    vars = {}
-                    if arguments.length > 1
-                        # get all the variable names without the route itself
-                        keys = route.split(':').slice(1)
-                        for key, index in keys
-                            vars[key.replace('/','')] = arguments[index+1]
-                    wire.loadModule(spec).then (specObj) ->
-                        currentContext?.destroy()
-                        specObj.vars = vars
-                        wire.createChild(specObj).then (ctx) ->
-                            currentContext = ctx
-                            window.ctx = ctx
-                        , (error) ->
-                            console.error error.stack
-                ).bind null, spec
-
-                tempRouter.route route, route, routeFn
-
 
         # bindToCollection = (resolver, componentDefinition, wire) ->
         #     createRouter(componentDefinition, wire).then (tempRouter) ->
@@ -51,9 +12,37 @@ define [
         #         resolver.resolve(tempRouter)
         #     , (error) ->
         #         console.error error.stack
-        bindToCollection = (resolver, componentDefinition, wire) ->
-            console.log ">>>>>>>>>>>>>>>>>", resolver, componentDefinition, wire
-            resolver.resolve(tempRouter)
+
+        doBind = (facet, options, wire) ->
+            target = facet.target
+
+            # it was
+            # return When(wire(initBindOptions(facet.options, options, wire.resolver)),
+
+            return When(wire({options: facet.options}),
+                    (options) ->
+                        to = options.to
+                        throw new Error('wire/cola: "to" must be specified') unless !to
+
+                        # addSource must be collection method
+                        # to.addSource(target, copyOwnProps(options));
+
+                        # options.options.to must be refactored (look at cola!)
+                        console.log "TARGET", target, options.options.to
+
+                        # here must be binded outer collection to view fields
+
+                        # 
+                        return target
+                )
+
+        bindFacet = (resolver, facet, wire) ->
+            resolver.resolve(doBind(facet, options, wire))
+
+        # bindToCollection = (resolver, proxy, wire) ->
+        #     # console.log ">>>>>>>>>>>>>>>>>", resolver.isRef proxy
+        #     console.log ">>>>>>>>>>>>>>>>>", resolver
+        #     resolver.resolve()
 
         context:
             ready: (resolver, wire) ->
@@ -64,4 +53,5 @@ define [
         destroy: {}
 
         facets: 
-            bind: bindToCollection
+            bind: 
+                ready: bindFacet

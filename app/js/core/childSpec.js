@@ -1,5 +1,10 @@
 define({
   $plugins: ["wire/debug", "wire/connect", "core/plugin/colBind"],
+  collection: {
+    create: {
+      module: "controls/testcontrol/collection/tableBodyCollection"
+    }
+  },
   tableView: {
     create: {
       module: "controls/testcontrol/tableControl"
@@ -29,6 +34,11 @@ define({
   bodyView: {
     create: {
       module: "controls/testcontrol/tableBodyControl"
+    },
+    bind: {
+      to: {
+        $ref: 'collection'
+      }
     }
   }
 });

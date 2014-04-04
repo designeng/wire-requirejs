@@ -5,6 +5,10 @@ define
         "core/plugin/colBind"
     ]
 
+    collection:
+        create:
+            module: "controls/testcontrol/collection/tableBodyCollection"
+
     tableView:
         create:
             module: "controls/testcontrol/tableControl"
@@ -19,7 +23,11 @@ define
     headerView:
         create:
             module: "controls/testcontrol/tableHeaderControl"
+
     bodyView:
         create:
             module: "controls/testcontrol/tableBodyControl"
+        bind: {
+            to: {$ref: 'collection'}
+        }
 
