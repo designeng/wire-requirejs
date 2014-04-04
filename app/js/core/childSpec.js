@@ -24,6 +24,14 @@ define({
     },
     connect: {
       'show': 'bootApp.showView'
+    },
+    bind: {
+      to: {
+        $ref: 'collection'
+      },
+      bindings: {
+        selector: ".tbody"
+      }
     }
   },
   headerView: {
@@ -34,14 +42,6 @@ define({
   bodyView: {
     create: {
       module: "controls/testcontrol/tableBodyControl"
-    },
-    bind: {
-      to: {
-        $ref: 'collection'
-      },
-      bindings: {
-        selector: ".tbody"
-      }
     }
   }
 });

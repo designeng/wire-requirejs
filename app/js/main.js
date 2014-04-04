@@ -66,7 +66,6 @@ require.config({
     "childSpec": "core/childSpec",
     "mediator": "boot/mediator",
     "context/main": "withwire/context/main",
-    "withwire": "withwire/withwire",
     "oneComponent": "withwire/components/oneComponent"
   }
 });

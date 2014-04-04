@@ -88,7 +88,6 @@ require.config
         "context/main" : "withwire/context/main"
 
         # modules
-        "withwire": "withwire/withwire"
         "oneComponent": "withwire/components/oneComponent"
 
 require [

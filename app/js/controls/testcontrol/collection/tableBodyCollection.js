@@ -12,7 +12,8 @@ define(["backbone"], function(Backbone) {
     }
 
     TableBodyCollection.prototype.initialize = function() {
-      var items;
+      var items,
+        _this = this;
       items = [
         {
           one: "ONE",
@@ -25,7 +26,19 @@ define(["backbone"], function(Backbone) {
           two: "TWO2"
         }
       ];
-      return this.add(items);
+      this.add(items);
+      setTimeout(function() {
+        return _this.add(new Backbone.Model({
+          one: 123,
+          two: 234
+        }));
+      }, 1000);
+      return setTimeout(function() {
+        return _this.add(new Backbone.Model({
+          one: 456,
+          two: "abc"
+        }));
+      }, 2000);
     };
 
     return TableBodyCollection;

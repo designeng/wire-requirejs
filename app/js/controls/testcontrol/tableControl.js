@@ -11,11 +11,11 @@ define(["marionette"], function(Marionette) {
       return _ref;
     }
 
-    TableControl.prototype.template = "					<thead class='thead'/>					<tbody class='tbody'/>				";
+    TableControl.prototype.template = "					<div class='tbody'>...</div>				";
 
     TableControl.prototype.regions = {
       thead: ".thead",
-      tbody: ".tbody"
+      tbody: "._tbody"
     };
 
     TableControl.prototype.initialize = function() {
@@ -29,8 +29,7 @@ define(["marionette"], function(Marionette) {
 
     TableControl.prototype.onRender = function() {
       console.log("@thead", this.thead);
-      console.log("@tbody", this.tbody);
-      return this.thead.show(this.header);
+      return console.log("@tbody", this.tbody);
     };
 
     return TableControl;

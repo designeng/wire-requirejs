@@ -4,13 +4,12 @@ define [
 	class TableControl extends Marionette.Layout
 
 		template: "
-					<thead class='thead'/>
-					<tbody class='tbody'/>
+					<div class='tbody'>...</div>
 				"
 
 		regions:
 			thead: ".thead"
-			tbody: ".tbody"
+			tbody: "._tbody"
 
 		initialize: ->
 			console.log "TableControl inited"
@@ -23,5 +22,5 @@ define [
 			console.log "@thead", @thead
 			console.log "@tbody", @tbody
 
-			@thead.show @header
+			# @thead.show @header
 			# @tbody.show @body

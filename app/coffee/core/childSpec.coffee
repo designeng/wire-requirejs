@@ -5,6 +5,10 @@ define
         "core/plugin/colBind"
     ]
 
+    # template:
+    #     module: "controls/testcontrol/tpl/tableTpl.html"
+
+
     collection:
         create:
             module: "controls/testcontrol/collection/tableBodyCollection"
@@ -19,6 +23,10 @@ define
             "show": {$ref:'tableView'}
         connect: 
             'show': 'bootApp.showView'
+        bind:
+            to: {$ref: 'collection'}
+            bindings:
+                selector: ".tbody"
 
     headerView:
         create:
@@ -27,10 +35,4 @@ define
     bodyView:
         create:
             module: "controls/testcontrol/tableBodyControl"
-        bind: {
-            to: {$ref: 'collection'}
-            bindings: {
-                selector: ".tbody"
-            }
-        }
 
