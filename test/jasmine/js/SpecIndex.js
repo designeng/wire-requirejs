@@ -1,4 +1,4 @@
 define(function() {
   var specs;
-  return specs = ["resultTableFilter/index"];
+  return specs = ["mixin/index"];
 });

@@ -1,7 +1,6 @@
 define [
     "wire"
     "marionette"
-    "text!./fixtures/resultTpl.html"
 ], (wire, Marionette) ->
 
     # ------------- table collection --------------------------
@@ -47,14 +46,18 @@ define [
             {}
         ]
 
-
+    # ------------- testDecorator -----------------
+    define "testDecorator", [], () ->
+        class testDecorator
+            testDecoratorMethod: () ->
+                console.log "testDec"
 
     # ------------- filter layout --------------------------
     define "filter", [
         "jquery"
         "marionette"
     ], ($, Marionette) ->
-        class Filter extends Marionette.Layout
+        class Filter
             template: ""
 
             initialize: ->
@@ -63,10 +66,23 @@ define [
 
     # ------------- rootSpec --------------------------
     rootSpec = 
+        keyDecorator:            
+            # create: 
+                # module: "mixins/baseActiveKey"
+                # args: 
+                #     BaseObject: Marionette.Controller           
+            create: 
+                module: "testDecorator"
         filter:
             create: 
                 module: "filter"
+            mixin: [
+                { $ref: 'keyDecorator' }
+            ]
         table: {wire: "tableSpec"}
+        $plugins:[
+            "wire/debug"
+        ]
 
 
     # ------------- test suites --------------------------
@@ -79,11 +95,16 @@ define [
                 console.log "ERROR", err
 
         it "filter", (done) ->
-            expect(@ctx.filter).toBeDefined()
+            @ctx.filter.testDecoratorMethod()
+            expect(@ctx.filter.testDecoratorMethod).toBeDefined()
             done()
-        it "table", (done) ->
-            expect(@ctx.table).toBeDefined()
-            done()
+        # it "filter", (done) ->
+        #     console.log @ctx.filter
+        #     # expect(@ctx.filter.bindKeysOn).toBeDefined()
+        #     done()
+        # it "table", (done) ->
+        #     expect(@ctx.table).toBeDefined()
+        #     done()
 
 
 

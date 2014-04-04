@@ -1,7 +1,7 @@
 var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-define(["wire", "marionette", "text!./fixtures/resultTpl.html"], function(wire, Marionette) {
+define(["wire", "marionette"], function(wire, Marionette) {
   var rootSpec;
   define("tableBodyCollection", ["backbone"], function(Backbone) {
     var TableBodyCollection, _ref;
@@ -73,15 +73,23 @@ define(["wire", "marionette", "text!./fixtures/resultTpl.html"], function(wire, 
     var filterData;
     return filterData = [{}];
   });
-  define("filter", ["jquery", "marionette"], function($, Marionette) {
-    var Filter, _ref;
-    return Filter = (function(_super) {
-      __extends(Filter, _super);
+  define("testDecorator", [], function() {
+    var testDecorator;
+    return testDecorator = (function() {
+      function testDecorator() {}
 
-      function Filter() {
-        _ref = Filter.__super__.constructor.apply(this, arguments);
-        return _ref;
-      }
+      testDecorator.prototype.testDecoratorMethod = function() {
+        return console.log("testDec");
+      };
+
+      return testDecorator;
+
+    })();
+  });
+  define("filter", ["jquery", "marionette"], function($, Marionette) {
+    var Filter;
+    return Filter = (function() {
+      function Filter() {}
 
       Filter.prototype.template = "";
 
@@ -91,17 +99,28 @@ define(["wire", "marionette", "text!./fixtures/resultTpl.html"], function(wire, 
 
       return Filter;
 
-    })(Marionette.Layout);
+    })();
   });
   rootSpec = {
+    keyDecorator: {
+      create: {
+        module: "testDecorator"
+      }
+    },
     filter: {
       create: {
         module: "filter"
-      }
+      },
+      mixin: [
+        {
+          $ref: 'keyDecorator'
+        }
+      ]
     },
     table: {
       wire: "tableSpec"
-    }
+    },
+    $plugins: ["wire/debug"]
   };
   return describe("After wire filterSpec context created", function() {
     beforeEach(function(done) {
@@ -113,12 +132,9 @@ define(["wire", "marionette", "text!./fixtures/resultTpl.html"], function(wire, 
         return console.log("ERROR", err);
       });
     });
-    it("filter", function(done) {
-      expect(this.ctx.filter).toBeDefined();
-      return done();
-    });
-    return it("table", function(done) {
-      expect(this.ctx.table).toBeDefined();
+    return it("filter", function(done) {
+      this.ctx.filter.testDecoratorMethod();
+      expect(this.ctx.filter.testDecoratorMethod).toBeDefined();
       return done();
     });
   });
