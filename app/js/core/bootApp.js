@@ -5,12 +5,26 @@ define(["appinstance", "core/modules/root/rootModule"], function(App, rootModule
       throw new Error("Application region not specified!");
     }
     App.addRegions({
-      application: options.regionSelector
+      root: options.regionSelector,
+      tableRegion: "#table"
     });
-    return rootModule.start(options);
+    return console.log("App.tableRegion", App.tableRegion);
   });
-  App.show = function(view) {
-    return this.regionSelector.show(view);
+  App.getRegionManager = function() {
+    return this._regionManager;
+  };
+  App.show = function(region, view) {
+    return region.show(view);
+  };
+  App.showView = function(view) {
+    this.tableRegion.show(view);
+    return view;
+  };
+  App.onTableReady = function(msg) {
+    return console.log("onTableReady:::", msg);
+  };
+  App.log = function(msg) {
+    return console.log("LOG");
   };
   return App;
 });

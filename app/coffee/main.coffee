@@ -20,6 +20,16 @@ require.config
             location: "../../bower_components/meld"
         },
         {
+            name: "cola"
+            main: "cola"
+            location: "../../bower_components/cola"
+        },
+        {
+            name: "rest"
+            main: "rest"
+            location: "../../bower_components/rest"
+        },
+        {
             name: "backbone"
             main: "backbone"
             location: "../../bower_components/backbone"
@@ -57,6 +67,7 @@ require.config
 
         # bootstrap spec
         "bootstrapSpec": "core/bootstrapSpec"
+        "childSpec": "core/childSpec"
 
         # mediator
         "mediator": "boot/mediator"
@@ -70,7 +81,12 @@ require.config
 
 require [
     "wire!bootstrapSpec"
-], (bootstrapSpec) ->
+    "childSpec"
+], (bootstrapCTX, childSpec) ->
 
-    console.log "bootstrapSpec", bootstrapSpec
+    bootstrapCTX.wire(
+            childSpec
+    ).then (childContext) ->
+        console.log "resultCTX:", childContext
+        
 

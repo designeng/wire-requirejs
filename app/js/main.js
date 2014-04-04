@@ -14,6 +14,14 @@ require.config({
       main: "meld",
       location: "../../bower_components/meld"
     }, {
+      name: "cola",
+      main: "cola",
+      location: "../../bower_components/cola"
+    }, {
+      name: "rest",
+      main: "rest",
+      location: "../../bower_components/rest"
+    }, {
       name: "backbone",
       main: "backbone",
       location: "../../bower_components/backbone"
@@ -44,6 +52,7 @@ require.config({
   paths: {
     "domReady": "../../bower_components/domReady/domReady",
     "bootstrapSpec": "core/bootstrapSpec",
+    "childSpec": "core/childSpec",
     "mediator": "boot/mediator",
     "context/main": "withwire/context/main",
     "withwire": "withwire/withwire",
@@ -51,6 +60,8 @@ require.config({
   }
 });
 
-require(["wire!bootstrapSpec"], function(bootstrapSpec) {
-  return console.log("bootstrapSpec", bootstrapSpec);
+require(["wire!bootstrapSpec", "childSpec"], function(bootstrapCTX, childSpec) {
+  return bootstrapCTX.wire(childSpec).then(function(childContext) {
+    return console.log("resultCTX:", childContext);
+  });
 });

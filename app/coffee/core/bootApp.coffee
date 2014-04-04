@@ -3,16 +3,44 @@ define [
     "core/modules/root/rootModule"
 ], (App, rootModule) ->
 
+    # createRegionInSelector = (el, id) ->
+    #     $(el).append("<div id=#{id} />")
+    #     r = new Marionette.Region
+    #         el: "##{id}"
+    #     return r
+
     App.addInitializer (options) ->
         console.log "App.addInitializer", options
         if !options.regionSelector
             throw new Error "Application region not specified!"
 
-        App.addRegions application: options.regionSelector
+        App.addRegions 
+            root: options.regionSelector
+            tableRegion: "#table"
 
-        rootModule.start options
+        console.log "App.tableRegion", App.tableRegion
 
-    App.show = (view) ->
-        @regionSelector.show view
+        # tableRegion = createRegionInSelector App.getRegionManager().get("root").el, "#table"
+
+        # console.log "tableRegion", tableRegion
+
+        # rootModule.start options
+
+    App.getRegionManager = () ->
+        @_regionManager
+
+    App.show = (region, view) ->
+        region.show view
+
+    App.showView = (view) ->
+        @.tableRegion.show view
+        return view
+
+    App.onTableReady = (msg) ->
+        console.log "onTableReady:::", msg
+
+    App.log = (msg) ->
+        console.log "LOG"
+
 
     return App
