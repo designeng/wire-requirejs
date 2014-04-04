@@ -1,5 +1,5 @@
 define({
-  $plugins: ["wire/debug"],
+  $plugins: [],
   bootApp: {
     module: "core/bootApp",
     ready: {

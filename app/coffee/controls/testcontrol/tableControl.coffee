@@ -1,9 +1,16 @@
 define [
     "marionette"
 ], (Marionette) ->
-	class TableControl extends Marionette.CompositeView
+	class TableControl extends Marionette.Layout
 
-		template: "<table><tr><td>table</td></tr></table>"
+		template: "
+					<thead class='thead'/>
+					<tbody class='tbody'/>
+				"
+
+		regions:
+			thead: ".thead"
+			tbody: ".tbody"
 
 		initialize: ->
 			console.log "TableControl inited"
@@ -12,6 +19,9 @@ define [
 			console.log "show after init", target
 			return target
 
-
 		onRender: ->
-			console.log "rendered"
+			console.log "@thead", @thead
+			console.log "@tbody", @tbody
+
+			@thead.show @header
+			@tbody.show @body

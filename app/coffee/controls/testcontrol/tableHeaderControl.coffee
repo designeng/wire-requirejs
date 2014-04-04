@@ -1,15 +1,12 @@
 define [
     "marionette"
 ], (Marionette) ->
-	class TableHeaderControl extends Marionette.CompositeView
+	class TableHeaderControl extends Marionette.Layout
 
-		template: "tableHeaderControl"
+		template: "<tr><td>HEADER</td></tr>"
 
 		initialize: ->
 			console.log "tableHeaderControl inited"
 
-		setHeader: (opt) ->
-			console.log "setHeader", opt
-
 		onRender: ->
-			console.log "rendered"
+			console.log "tableHeaderControl rendered"

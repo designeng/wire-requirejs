@@ -5,15 +5,21 @@ define
         "core/plugin/colBind"
     ]
 
-    bindignView:
+    tableView:
         create:
             module: "controls/testcontrol/tableControl"
+        properties:
+            header: {$ref: 'headerView'}
+            body: {$ref: 'bodyView'}
         ready:
-            "show": {$ref:'bindignView'}
+            "show": {$ref:'tableView'}
         connect: 
-            'show': 'bootApp.showView | bootApp.onTableReady | bootApp.log'
+            'show': 'bootApp.showView'
 
     headerView:
         create:
             module: "controls/testcontrol/tableHeaderControl"
+    bodyView:
+        create:
+            module: "controls/testcontrol/tableBodyControl"
 

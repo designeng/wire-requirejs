@@ -60,7 +60,7 @@ require.config({
   }
 });
 
-require(["wire!bootstrapSpec", "childSpec"], function(bootstrapCTX, childSpec) {
+require(["wire!bootstrapSpec", "childSpec", "overridden"], function(bootstrapCTX, childSpec) {
   return bootstrapCTX.wire(childSpec).then(function(childContext) {
     return console.log("resultCTX:", childContext);
   });

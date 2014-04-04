@@ -11,21 +11,17 @@ define(["marionette"], function(Marionette) {
       return _ref;
     }
 
-    TableHeaderControl.prototype.template = "tableHeaderControl";
+    TableHeaderControl.prototype.template = "<tr><td>HEADER</td></tr>";
 
     TableHeaderControl.prototype.initialize = function() {
       return console.log("tableHeaderControl inited");
     };
 
-    TableHeaderControl.prototype.setHeader = function(opt) {
-      return console.log("setHeader", opt);
-    };
-
     TableHeaderControl.prototype.onRender = function() {
-      return console.log("rendered");
+      return console.log("tableHeaderControl rendered");
     };
 
     return TableHeaderControl;
 
-  })(Marionette.CompositeView);
+  })(Marionette.Layout);
 });

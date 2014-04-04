@@ -11,7 +11,12 @@ define(["marionette"], function(Marionette) {
       return _ref;
     }
 
-    TableControl.prototype.template = "<table><tr><td>table</td></tr></table>";
+    TableControl.prototype.template = "					<thead class='thead'/>					<tbody class='tbody'/>				";
+
+    TableControl.prototype.regions = {
+      thead: ".thead",
+      tbody: ".tbody"
+    };
 
     TableControl.prototype.initialize = function() {
       return console.log("TableControl inited");
@@ -23,10 +28,13 @@ define(["marionette"], function(Marionette) {
     };
 
     TableControl.prototype.onRender = function() {
-      return console.log("rendered");
+      console.log("@thead", this.thead);
+      console.log("@tbody", this.tbody);
+      this.thead.show(this.header);
+      return this.tbody.show(this.body);
     };
 
     return TableControl;
 
-  })(Marionette.CompositeView);
+  })(Marionette.Layout);
 });

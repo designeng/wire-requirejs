@@ -82,11 +82,10 @@ require.config
 require [
     "wire!bootstrapSpec"
     "childSpec"
+    "overridden"
 ], (bootstrapCTX, childSpec) ->
 
     bootstrapCTX.wire(
             childSpec
     ).then (childContext) ->
         console.log "resultCTX:", childContext
-        
-
