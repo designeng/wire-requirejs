@@ -1,57 +1,80 @@
 define [
     "wire"
     "marionette"
+    "text!./fixtures/resultTpl.html"
 ], (wire, Marionette) ->
 
-    define "switcher", [
-        "marionette"
-    ], (Marionette) ->
-        class Switcher extends Marionette.Layout
-            template: "<div>Switcher test</div>"
+    # ------------- table collection --------------------------
+    define "tableBodyCollection", [
+        "backbone"
+    ], (Backbone) ->
+        class TableBodyCollection extends Backbone.Collection
 
             initialize: ->
-                console.log "SWITCHER"
+                items = [
+                    {one: "ONE", two: "TWO"}
+                    {one: "ONE1", two: "TWO1"}
+                    {one: "ONE2", two: "TWO2"}
+                ]
+                @add items
+
+    # ------------- table layout --------------------------
+    define "table", [
+        "marionette"
+    ], (Marionette) ->
+        class Table extends Marionette.Layout
+            template: ""
+
+            initialize: ->
+                console.log "table"
+    
+    # ------------- tableSpec --------------------------
+    define "tableSpec", ->
+        tableSpec = 
+            collection: 
+                create:
+                    module: "tableBodyCollection"
+            table:
+                create: 
+                    module: "table"
 
 
-    define "input", [
+    # ------------- filter layout --------------------------
+    define "filter", [
         "jquery"
         "marionette"
     ], ($, Marionette) ->
-        class InputText extends Marionette.Layout
-            template: "<input type='text' value='MyInput'/>"
+        class Filter extends Marionette.Layout
+            template: ""
 
             initialize: ->
-                console.log "InputText"
-
-            updateValue: ->
-                @$el.find("input").val @value
+                console.log "Filter"
 
 
-    itemsSpec = 
-        switcher:
-            create:
-                module: "switcher"
-            ready: "render"
-        inputOne:
-            create:
-                module: "input"
-            properties:
-                value: "INPUT TEXT TEST"
-            ready: "updateValue"
+    # ------------- rootSpec --------------------------
+    rootSpec = 
+        filter:
+            create: 
+                module: "filter"
+        table: {wire: "tableSpec"}
 
 
-
-    describe "After wire context created", ->
+    # ------------- test suites --------------------------
+    describe "After wire filterSpec context created", ->
 
         beforeEach (done) ->
-            wire(itemsSpec).then (@ctx) =>
+            wire(rootSpec).then (@ctx) =>
                 done()
             .otherwise (err) ->
                 console.log "ERROR", err
 
-        it "switcher", (done) ->
-            expect(@ctx.switcher).toBeDefined()
+        it "filter", (done) ->
+            expect(@ctx.filter).toBeDefined()
             done()
-        it "inputOne", (done) ->
-            expect(@ctx.inputOne).toBeDefined()
+        it "table", (done) ->
+            expect(@ctx.table).toBeDefined()
             done()
+
+
+
+
