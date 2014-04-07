@@ -62,12 +62,16 @@ require.config({
     },
     "backbone.collectionbinder": {
       deps: ["backbone.modelbinder"]
+    },
+    backbone: {
+      deps: ["underscore", "jquery"]
     }
   },
   paths: {
     "domReady": "../../bower_components/domReady/domReady",
     "bootstrapSpec": "core/bootstrapSpec",
     "childSpec": "core/childSpec",
+    "listenToSpec": "core/listenToSpec",
     "mediator": "boot/mediator",
     "context/main": "withwire/context/main",
     "oneComponent": "withwire/components/oneComponent"

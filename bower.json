@@ -8,7 +8,7 @@
     "cola": "~0.1.6",
     "rest": "latest",
     "requirejs": "latest",
-    "backbone": "latest",
+    "backbone": "git://github.com/amdjs/backbone.git",
     "marionette": "latest",
     "text": "latest",
     "Backbone.ModelBinder": "~1.0.5",

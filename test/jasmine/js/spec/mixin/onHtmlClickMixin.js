@@ -4,55 +4,33 @@ var __hasProp = {}.hasOwnProperty,
 define(["wire", "marionette"], function(wire, Marionette) {
   var rootSpec;
   define("globalEvents", ["jquery", "underscore", "backbone"], function($, _, Backbone) {
-    var GlobalEvents, globalEvents;
+    var GlobalEvents;
     GlobalEvents = (function() {
-      GlobalEvents.prototype.htmlEvents = ['html:click'];
+      function GlobalEvents() {}
 
-      GlobalEvents.prototype.windowsEvents = ['window:resize'];
-
-      function GlobalEvents() {
-        this.bindGlobalEvents();
-      }
-
-      GlobalEvents.prototype.bindGlobalEvents = function() {
-        var _this = this;
-        $(window).on('resize', function() {
-          var sEvents;
-          sEvents = _this.joinEvent('windowsEvents');
-          return _this.trigger(sEvents, {
-            width: $(window).width(),
-            height: $(window).height()
-          });
-        });
-        return $("html").on('click', function(e) {
-          var sEvents;
-          sEvents = _this.joinEvent('htmlEvents');
-          return _this.trigger(sEvents, e);
+      GlobalEvents.prototype.initialize = function() {
+        return this.on("html:click", function() {
+          return console.log("GlobalEvents");
         });
       };
 
-      GlobalEvents.prototype.addHtmlEvent = function(eventName) {
-        return this.htmlEvents.push(eventName);
+      GlobalEvents.prototype.play = function(opt) {
+        return console.log("PLAY", opt);
       };
 
-      GlobalEvents.prototype.removeHtmlEvent = function(eventName) {
-        return this.htmlEvents = _.without(this.htmlEvents, eventName);
-      };
-
-      GlobalEvents.prototype.joinEvent = function(eventGroup) {
-        return this[eventGroup].join(' ');
+      GlobalEvents.prototype.triggerEvent = function(ev) {
+        return this.trigger(ev);
       };
 
       return GlobalEvents;
 
     })();
-    GlobalEvents = _.extend(GlobalEvents, Backbone.Events);
-    if (typeof globalEvents === "undefined" || globalEvents === null) {
-      return globalEvents = new GlobalEvents();
-    }
+    GlobalEvents = _.extend(GlobalEvents.prototype, Backbone.Events);
+    return GlobalEvents;
   });
   define("targetToMixin", ["marionette"], function(Marionette) {
-    var TargetToMixin, _ref;
+    var TargetToMixin, onHtmlClick, _ref;
+    onHtmlClick = jasmine.createSpy("onHtmlClick");
     return TargetToMixin = (function(_super) {
       __extends(TargetToMixin, _super);
 
@@ -64,12 +42,15 @@ define(["wire", "marionette"], function(wire, Marionette) {
       TargetToMixin.prototype.template = "";
 
       TargetToMixin.prototype.initialize = function() {
+        var _this = this;
         console.log("targetToMixin");
-        return this.onHtmlClick();
+        return setTimeout(function() {
+          return _this.trigger("html:click");
+        }, 1000);
       };
 
       TargetToMixin.prototype.onHtmlClick = function() {
-        return console.log("onHtmlClick----");
+        return console.log("onHtmlClick");
       };
 
       return TargetToMixin;
@@ -78,15 +59,20 @@ define(["wire", "marionette"], function(wire, Marionette) {
   });
   rootSpec = {
     globalEvents: {
-      module: "globalEvents"
+      create: {
+        module: "globalEvents"
+      },
+      ready: {
+        "triggerEvent": "html:click"
+      }
     },
     targetToMixin: {
       create: {
-        module: "targetToMixin"
-      },
-      listenTo: {
-        globalEvents: {
-          "html:click": "onHtmlClick"
+        module: "targetToMixin",
+        listenTo: {
+          globalEvents: {
+            "html:click": "onHtmlClick"
+          }
         }
       }
     },

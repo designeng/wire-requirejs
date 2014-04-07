@@ -24,3 +24,4 @@ define [
 
 			# @thead.show @header
 			# @tbody.show @body
+

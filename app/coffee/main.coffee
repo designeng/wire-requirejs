@@ -2,10 +2,11 @@ require [
     "wire"
     "wire!bootstrapSpec"
     "childSpec"
+    "listenToSpec"
     "overridden"
-], (wire, bootstrapCTX, childSpec) ->
+], (wire, bootstrapCTX, childSpec, listenToSpec) ->
 
     bootstrapCTX.wire(
-            childSpec
+            listenToSpec
     ).then (childContext) ->
         console.log "resultCTX:", childContext

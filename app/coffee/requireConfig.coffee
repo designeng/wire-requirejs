@@ -77,6 +77,9 @@ require.config
             exports: "Marionette"
         "backbone.collectionbinder":
             deps: ["backbone.modelbinder"]
+        backbone:
+            deps: ["underscore", "jquery"]
+
 
     paths:
         # plugins
@@ -85,6 +88,7 @@ require.config
         # bootstrap spec
         "bootstrapSpec": "core/bootstrapSpec"
         "childSpec": "core/childSpec"
+        "listenToSpec": "core/listenToSpec"
 
         # mediator
         "mediator": "boot/mediator"
