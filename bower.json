@@ -11,6 +11,7 @@
     "backbone": "latest",
     "marionette": "latest",
     "text": "latest",
-    "Backbone.ModelBinder": "~1.0.5"
+    "Backbone.ModelBinder": "~1.0.5",
+    "listenTo": "git://github.com/designeng/listenTo.git"
   }
 }

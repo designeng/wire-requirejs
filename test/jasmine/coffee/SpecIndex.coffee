@@ -4,7 +4,8 @@ define ->
         # "core/routeMap/routeMapWorkFlow"
         # "core/coreWorkFlow"
         # "core/itemsInCompositeView/itemsToCompositeViewPlugin"
-        
+
         # "resultTableFilter/index"
-        "mixin/index"
+        # "mixin/index"
+        "mixin/onHtmlClickMixin"
     ]

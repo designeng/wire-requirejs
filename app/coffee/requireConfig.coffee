@@ -63,6 +63,11 @@ require.config
             name: "text"
             main: "text"
             location: "../../bower_components/text"
+        },
+        {
+            name: "listenTo"
+            main: "listenTo"
+            location: "../../bower_components/listenTo"
         }     
     ]
 

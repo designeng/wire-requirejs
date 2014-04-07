@@ -1,4 +1,4 @@
 define(function() {
   var specs;
-  return specs = ["mixin/index"];
+  return specs = ["mixin/onHtmlClickMixin"];
 });
