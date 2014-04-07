@@ -39,6 +39,11 @@ require.config
             main: "underscore"
             location: "../../bower_components/underscore"
         },
+        {   
+            name: "underscore.string"
+            main: "underscore.string"
+            location: "../../bower_components/underscore.string/lib"
+        },
         {
             name: "marionette"
             main: "backbone.marionette"
@@ -79,6 +84,8 @@ require.config
             deps: ["backbone.modelbinder"]
         backbone:
             deps: ["underscore", "jquery"]
+        "underscore.string":
+            deps: ["underscore"]
 
 
     paths:

@@ -20,9 +20,6 @@ define(["appinstance", "core/modules/root/rootModule"], function(App, rootModule
     this.tableRegion.show(view);
     return view;
   };
-  App.onTableReady = function(msg) {
-    return console.log("onTableReady:::", msg);
-  };
   App.log = function(msg) {
     return console.log("LOG");
   };

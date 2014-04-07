@@ -1,142 +1,69 @@
-define(["backbone", "marionette", "baseActiveKey", "globalEvents", "controlContainerService", "inputError", "controls/switch/init/bindKeyMethods", "core/utils/view/applyModelProperties", "core/utils/aspect/defineCommonAspect"], function(Backbone, Marionette, BaseActiveKey, globalEvents, controlContainerService, InputErrorControl, bindKeyMethods, applyModelProperties, defineCommonAspect) {
-  var NoItemsView, SwitchControlView, SwitchItemView;
+var __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+define(["backbone", "marionette", "meld", "controls/switch/init/bindKeyMethods", "underscore.string"], function(Backbone, Marionette, Meld, bindKeyMethods, _Str) {
+  var NoItemsView, SwitchControlView, _ref;
   NoItemsView = Marionette.ItemView.extend({
     template: 'No options'
   });
-  SwitchItemView = Marionette.ItemView.extend({
-    template: '<input type="radio" name="{{inputName}}"/><label for="{{inputName}}">{{inputNameValue}}</label>',
-    className: function() {
-      return this.defaultClassName("switchControlItem");
-    },
-    templateHelpers: {
-      inputName: function() {
-        var keys, name, _name;
-        if (!(name = this.name)) {
-          return _.uniqueId("radio_");
-        } else {
-          if (_.isString(this.name)) {
-            _name = this.name;
-            this.name = {};
-            this.name[_name] = _name;
-          }
-          keys = _.keys(this.name);
-          return keys[0].toLowerCase();
-        }
-      },
-      inputNameValue: function() {
-        var keys, name;
-        if (!(name = this.name)) {
-          return _.uniqueId("radio_") + "_Value";
-        } else {
-          keys = _.keys(this.name);
-          return this.name[keys[0]];
-        }
-      }
-    },
-    events: {
-      "click": "onClick",
-      "focus :input": "onInputFocus",
-      "blur :input": "onInputBlur"
-    },
-    _attrPrefix: "",
-    initialize: function() {
-      return this.applyModelProperties(["itemSelectedClass", "itemFocusedClass"], {
-        prefix: this._attrPrefix
-      });
-    },
-    onRender: function() {
-      this.input = this.$el.find("input");
-      this.label = this.$el.find("label");
-      this.index = this.model.get("index");
-      _.bindAll(this, "onInputFocus");
-      if (this.index !== 0) {
-        this.input.remove();
-      }
-      return this.$el.addClass("item" + this.index);
-    },
-    onClick: function() {
-      this.check();
-      return this.trigger("checked");
-    },
-    check: function() {
-      this.input.attr("checked", "checked");
-      this.label.addClass(this.itemSelectedClass);
-      return this.label.removeClass(this.itemFocusedClass);
-    },
-    unCheck: function() {
-      this.input.removeAttr("checked");
-      this.label.removeClass(this.itemSelectedClass);
-      return this.label.removeClass(this.itemFocusedClass);
-    },
-    onInputFocus: function() {
-      if (this.index === 0) {
-        this.trigger("infocus", this.index);
-      }
-      return this.label.addClass(this.itemFocusedClass);
-    },
-    onInputBlur: function() {
-      if (this.index === 0) {
-        this.trigger("inblur");
-      }
-      return this.label.removeClass(this.itemFocusedClass);
+  return SwitchControlView = (function(_super) {
+    __extends(SwitchControlView, _super);
+
+    function SwitchControlView() {
+      _ref = SwitchControlView.__super__.constructor.apply(this, arguments);
+      return _ref;
     }
-  });
-  return SwitchControlView = BaseActiveKey({
-    BaseObject: Marionette.CompositeView
-  }).extend({
-    className: function(res) {
-      return this.defaultClassName("switchControl");
-    },
-    itemView: SwitchItemView,
-    emptyView: NoItemsView,
-    initialize: function(options) {
-      var evt, methodName, remover, _i, _len, _ref,
-        _this = this;
-      this.context = Marionette.getOption(this, "context");
-      this.eventBus = _.extend({}, Backbone.Events);
-      applyModelProperties.call(this, this.model, "width", "height", "fontSize", "inputOptions", "itemClassName", "itemFocusedClass", "itemSelectedClass", "showInputs", "startIndex", {
-        prefix: this._attrPrefix
-      });
+
+    SwitchControlView.prototype.template = "<div>---</div>";
+
+    SwitchControlView.prototype.className = function(res) {
+      return "switchControl";
+    };
+
+    SwitchControlView.prototype.itemView = void 0;
+
+    SwitchControlView.prototype.emptyView = NoItemsView;
+
+    SwitchControlView.prototype.initialize = function(options) {
       this.collection = new Backbone.Collection();
-      this._removers = [];
-      this._keyEvents = ["up", "down", "left", "right", "space", "tab"];
       bindKeyMethods.call(this);
-      _ref = this._keyEvents;
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        evt = _ref[_i];
+      this.on("itemview:checked", this.onItemClick);
+      this.on("itemview:infocus", this.onInFocus);
+      this.on("itemview:inblur", this.onInBlur);
+      return this.inFocus = false;
+    };
+
+    SwitchControlView.prototype.show = function(target) {
+      console.log("show after init", target);
+      return target;
+    };
+
+    SwitchControlView.prototype.createMethods = function() {
+      var evt, methodName, remover, _i, _len, _ref1, _results,
+        _this = this;
+      this._removers = [];
+      _ref1 = this.keyEvents;
+      _results = [];
+      for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+        evt = _ref1[_i];
         methodName = this._getMethodName(evt);
         if (!this[methodName]) {
           this[methodName] = function(e) {};
         }
-        remover = defineCommonAspect.call(this, methodName, "afterKeyPressed", "after");
-        this._removers.push(remover);
+        remover = Meld.after(this, methodName, "afterKeyPressed");
+        _results.push(this._removers.push(remover));
       }
-      this.on("itemview:checked", this.onItemClick);
-      this.on("itemview:infocus", this.onInFocus);
-      this.on("itemview:inblur", this.onInBlur);
-      this.inFocus = false;
-      _.bindAll(this, "onHtmlClick");
-      globalEvents.on("html:click", this.onHtmlClick);
-      if (this.model.has("inputErrorHandlerCid")) {
-        return this.inputError = controlContainerService.findByCid(this.model.get("inputErrorHandlerCid"));
-      } else {
-        return this.inputError = new InputErrorControl({
-          model: new Backbone.Model()
-        });
-      }
-    },
-    onBeforeRender: function() {
-      var modIndex, option, optionModel, _i, _len, _ref;
-      this._inputOptionsPrepared = this.prepareLocalized(this._inputOptions, "object");
+      return _results;
+    };
+
+    SwitchControlView.prototype.onBeforeRender = function() {
+      var modIndex, option, optionModel, _i, _len, _ref1;
       modIndex = 0;
-      _ref = this._inputOptionsPrepared;
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        option = _ref[_i];
+      _ref1 = this.inputOptions;
+      for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+        option = _ref1[_i];
         optionModel = new Backbone.Model({
           name: option,
-          eventBus: this.eventBus,
-          itemSelectedClass: this._itemSelectedClass,
-          itemFocusedClass: this._itemFocusedClass,
           index: modIndex++
         });
         this.collection.add(optionModel);
@@ -144,8 +71,9 @@ define(["backbone", "marionette", "baseActiveKey", "globalEvents", "controlConta
       if (this.collection.length) {
         return this.currentIndex = 0;
       }
-    },
-    onRender: function() {
+    };
+
+    SwitchControlView.prototype.onRender = function() {
       var _this = this;
       if (!this._showInputs) {
         this.hideInputs();
@@ -153,26 +81,20 @@ define(["backbone", "marionette", "baseActiveKey", "globalEvents", "controlConta
       _.each(this._keyEvents, function(evt) {
         return _this.keyOn(evt, _this._bindKeyEventToMethod(_this._getMethodName(evt)));
       });
-      this.dataModel = Marionette.getOption(this, "dataModel");
-      this.dataModel.bind("validated", function(isValid, model, errors) {
-        if (!isValid) {
-          return console.log("NOT VALID");
-        } else {
-          return _this.context.trigger("collect:data", _this.dataModel);
-        }
-      });
       if (_.isNumber(this._startIndex)) {
         return this.chooseItem(this._startIndex);
       }
-    },
-    onHtmlClick: function(e) {
+    };
+
+    SwitchControlView.prototype.onHtmlClick = function(e) {
       if ($.contains(this.el, e.target)) {
         return this.onInsideClick();
       } else {
         return this.onOutClick();
       }
-    },
-    hideInputs: function() {
+    };
+
+    SwitchControlView.prototype.hideInputs = function() {
       var _this = this;
       return this.children.each(function(item) {
         if (item.model.get("index") === 0) {
@@ -181,25 +103,31 @@ define(["backbone", "marionette", "baseActiveKey", "globalEvents", "controlConta
           return item.input.hide();
         }
       });
-    },
-    onInFocus: function(index) {
+    };
+
+    SwitchControlView.prototype.onInFocus = function(index) {
       return this.inFocus = true;
-    },
-    onInBlur: function() {
+    };
+
+    SwitchControlView.prototype.onInBlur = function() {
       return this.inFocus = false;
-    },
-    onInsideClick: function() {
+    };
+
+    SwitchControlView.prototype.onInsideClick = function() {
       return this.inFocus = true;
-    },
-    onOutClick: function() {
+    };
+
+    SwitchControlView.prototype.onOutClick = function() {
       return this.inFocus = false;
-    },
-    onItemClick: function(itemview) {
+    };
+
+    SwitchControlView.prototype.onItemClick = function(itemview) {
       this.inFocus = true;
       this.currentIndex = itemview.model.get("index");
       return this.chooseItem(this.currentIndex);
-    },
-    afterKeyPressed: function(key) {
+    };
+
+    SwitchControlView.prototype.afterKeyPressed = function(key) {
       if (!this.inFocus) {
         return;
       }
@@ -212,18 +140,21 @@ define(["backbone", "marionette", "baseActiveKey", "globalEvents", "controlConta
       if (key === "down" || key === "right") {
         return this.chooseNext();
       }
-    },
-    choosePrevious: function() {
+    };
+
+    SwitchControlView.prototype.choosePrevious = function() {
       if (this.currentIndex > 0) {
         return this.chooseItem(--this.currentIndex);
       }
-    },
-    chooseNext: function() {
+    };
+
+    SwitchControlView.prototype.chooseNext = function() {
       if (this.currentIndex < this.collection.length - 1) {
         return this.chooseItem(++this.currentIndex);
       }
-    },
-    chooseItem: function(index) {
+    };
+
+    SwitchControlView.prototype.chooseItem = function(index) {
       var item;
       if (_.isNumber(this.checkedItemIndex)) {
         this.children.findByIndex(this.checkedItemIndex).unCheck();
@@ -233,21 +164,25 @@ define(["backbone", "marionette", "baseActiveKey", "globalEvents", "controlConta
       this.checkedItemIndex = index;
       this.dataModel.set("name", this.model.get("name"));
       this.dataModel.set("data", _.keys(item.model.get("name"))[0]);
-      this.context.trigger("collect:data", this.dataModel);
-      this.context.trigger("switch:selected", this.dataModel.get("data"));
       return item;
-    },
-    onClose: function() {
+    };
+
+    SwitchControlView.prototype.onClose = function() {
       var _this = this;
       return _.each(this._keyEvents, function(evt) {
         return _this.keyOff(evt);
       });
-    },
-    _getMethodName: function(string) {
-      return "on" + _.str.classify.call(this, string);
-    },
-    _bindKeyEventToMethod: function(methodName) {
+    };
+
+    SwitchControlView.prototype._getMethodName = function(string) {
+      return "on" + _Str.classify.call(this, string);
+    };
+
+    SwitchControlView.prototype._bindKeyEventToMethod = function(methodName) {
       return this[methodName];
-    }
-  });
+    };
+
+    return SwitchControlView;
+
+  })(Marionette.CompositeView);
 });

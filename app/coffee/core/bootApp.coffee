@@ -36,9 +36,6 @@ define [
         @.tableRegion.show view
         return view
 
-    App.onTableReady = (msg) ->
-        console.log "onTableReady:::", msg
-
     App.log = (msg) ->
         console.log "LOG"
 

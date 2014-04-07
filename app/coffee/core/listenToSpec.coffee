@@ -16,3 +16,40 @@ define
             globalEvents:
                 "html:click": "onHtmlClick"
 
+    switchItemView:
+        module: "controls/switch/item/switchItemView"
+
+    switcher:
+        create: 
+            module: "controls/switch/switchControl"
+        properties:
+            # defaultClassName: "mixins/defaultClassName"
+            itemView: {$ref: 'switchItemView'}
+            keyEvents: ["up", "down", "left", "right", "space", "tab"]
+            inputOptions: ["loc_One", "loc_Two"]  # @prepareLocalized(@_inputOptions, "object") - must be in outer service - prepare template before injecting
+            # itemFocusedClass:
+            # itemSelectedClass:
+            # showInputs:
+            # startIndex:
+
+        # mixin: [
+        #     {$ref: "mixins/defaultClassName"}
+        # ]
+
+        init:
+            createMethods: {}
+
+        listenTo:
+            globalEvents:
+                "html:click": "onHtmlClick"
+
+        connect: 
+            "show": 'bootApp.showView'
+
+        ready:
+            "show": {$ref:'switcher'}
+
+        destroy:
+            triggerMethod: "close"
+
+
