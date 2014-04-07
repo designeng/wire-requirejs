@@ -4,6 +4,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wire-RequireJs</title>
 
+    <!-- css -->
+    <style>
+    .switchControl {
+          border: 0;
+          white-space: nowrap;
+          display: inline-block;
+          border-radius: 2px;
+          overflow: hidden;
+        }
+        .switchControlItem {
+          display: inline-block;
+          white-space: normal;
+        }
+        .switchControlItem LABEL {
+          font-size: 11px;
+          font-family: Arial;
+          line-height: 32px;
+          color: #434647;
+          display: block;
+          cursor: pointer;
+          padding: 0 8px;
+          background: #e9eff0;
+        }
+        .switchControl .switchItem__selected {
+          background: #269dd8;
+          cursor: default;
+          color: #fff;
+        }
+        .switchControl .switchItemInput__hidden {
+          position: absolute;
+          -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+          filter: alpha(opacity=0);
+          -moz-opacity: 0;
+          -khtml-opacity: 0;
+          opacity: 0;
+        }
+        .switchControl .switchItem__focused {
+          border: 1px dotted;
+        }
+    </style>
+
     <script type="text/javascript" data-main="/app/js/main_with_require_config" src="/app/js/lib/require.js"></script>
 
 </head>

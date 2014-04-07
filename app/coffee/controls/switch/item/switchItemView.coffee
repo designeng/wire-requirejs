@@ -10,6 +10,9 @@ define [
         # @injected
         itemFocusedClass: undefined
 
+        logProp: ->
+            console.log "log:::", @itemSelectedClass, @itemFocusedClass
+
         template: '<input type="radio" name="{{inputName}}"/><label for="{{inputName}}">{{inputNameValue}}</label>'
 
         className: ->
@@ -18,6 +21,7 @@ define [
 
         templateHelpers:
             inputName: ->
+                console.log "templateHelpers ----"
                 unless name = @name
                     _.uniqueId "radio_"
                 else
@@ -42,7 +46,12 @@ define [
 
         initialize: ->
 
+        log: (arg) ->
+            console.log "READY:", arg
+
         onRender: ->
+            console.log "@itemSelectedClass", @itemSelectedClass
+
             @input = @$el.find("input")
             @label = @$el.find("label")
 

@@ -15,6 +15,10 @@ define(["marionette"], function(Marionette) {
 
     SwitchItemView.prototype.itemFocusedClass = void 0;
 
+    SwitchItemView.prototype.logProp = function() {
+      return console.log("log:::", this.itemSelectedClass, this.itemFocusedClass);
+    };
+
     SwitchItemView.prototype.template = '<input type="radio" name="{{inputName}}"/><label for="{{inputName}}">{{inputNameValue}}</label>';
 
     SwitchItemView.prototype.className = function() {
@@ -24,6 +28,7 @@ define(["marionette"], function(Marionette) {
     SwitchItemView.prototype.templateHelpers = {
       inputName: function() {
         var keys, name, _name;
+        console.log("templateHelpers ----");
         if (!(name = this.name)) {
           return _.uniqueId("radio_");
         } else {
@@ -55,7 +60,12 @@ define(["marionette"], function(Marionette) {
 
     SwitchItemView.prototype.initialize = function() {};
 
+    SwitchItemView.prototype.log = function(arg) {
+      return console.log("READY:", arg);
+    };
+
     SwitchItemView.prototype.onRender = function() {
+      console.log("@itemSelectedClass", this.itemSelectedClass);
       this.input = this.$el.find("input");
       this.label = this.$el.find("label");
       this.index = this.model.get("index");

@@ -18,18 +18,26 @@ define
 
     switchItemView:
         module: "controls/switch/item/switchItemView"
+            
+        # ready:
+        #     "log": "test"
+
 
     switcher:
         create: 
             module: "controls/switch/switchControl"
+            args:
+                name: "switch"
         properties:
             # defaultClassName: "mixins/defaultClassName"
             itemView: {$ref: 'switchItemView'}
             keyEvents: ["up", "down", "left", "right", "space", "tab"]
-            inputOptions: ["loc_One", "loc_Two"]  # @prepareLocalized(@_inputOptions, "object") - must be in outer service - prepare template before injecting
-            # itemFocusedClass:
-            # itemSelectedClass:
-            # showInputs:
+            inputOptions: ["loc_One", "loc_Two", "loc_Three"]  # @prepareLocalized(@_inputOptions, "object") - must be in outer service - prepare template before injecting
+
+            itemFocusedClass: "switchItem__focused"
+            itemSelectedClass: "switchItem__selected"
+            
+            showInputs: true
             # startIndex:
 
         # mixin: [

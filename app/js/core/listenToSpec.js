@@ -20,14 +20,20 @@ define({
   },
   switcher: {
     create: {
-      module: "controls/switch/switchControl"
+      module: "controls/switch/switchControl",
+      args: {
+        name: "switch"
+      }
     },
     properties: {
       itemView: {
         $ref: 'switchItemView'
       },
       keyEvents: ["up", "down", "left", "right", "space", "tab"],
-      inputOptions: ["loc_One", "loc_Two"]
+      inputOptions: ["loc_One", "loc_Two", "loc_Three"],
+      itemFocusedClass: "switchItem__focused",
+      itemSelectedClass: "switchItem__selected",
+      showInputs: true
     },
     init: {
       createMethods: {}

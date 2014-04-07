@@ -14,7 +14,7 @@ define(["backbone", "marionette", "meld", "controls/switch/init/bindKeyMethods",
       return _ref;
     }
 
-    SwitchControlView.prototype.template = "<div>---</div>";
+    SwitchControlView.prototype.template = "<ul></ul>";
 
     SwitchControlView.prototype.className = function(res) {
       return "switchControl";
@@ -24,7 +24,10 @@ define(["backbone", "marionette", "meld", "controls/switch/init/bindKeyMethods",
 
     SwitchControlView.prototype.emptyView = NoItemsView;
 
-    SwitchControlView.prototype.initialize = function(options) {
+    SwitchControlView.prototype.initialize = function() {
+      this.model = new Backbone.Model({
+        name: Marionette.getOption(this, "name")
+      });
       this.collection = new Backbone.Collection();
       bindKeyMethods.call(this);
       this.on("itemview:checked", this.onItemClick);
@@ -64,6 +67,8 @@ define(["backbone", "marionette", "meld", "controls/switch/init/bindKeyMethods",
         option = _ref1[_i];
         optionModel = new Backbone.Model({
           name: option,
+          itemFocusedClass: this.itemFocusedClass,
+          itemSelectedClass: this.itemSelectedClass,
           index: modIndex++
         });
         this.collection.add(optionModel);
@@ -162,8 +167,8 @@ define(["backbone", "marionette", "meld", "controls/switch/init/bindKeyMethods",
       item = this.children.findByIndex(index);
       item.check();
       this.checkedItemIndex = index;
-      this.dataModel.set("name", this.model.get("name"));
-      this.dataModel.set("data", _.keys(item.model.get("name"))[0]);
+      this.model.set("name", this.model.get("name"));
+      this.model.set("data", _.keys(item.model.get("name"))[0]);
       return item;
     };
 

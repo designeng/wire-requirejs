@@ -3,10 +3,12 @@ require [
     "wire!bootstrapSpec"
     "childSpec"
     "listenToSpec"
+    "extenderPluginSpec"
     "overridden"
-], (wire, bootstrapCTX, childSpec, listenToSpec) ->
+], (wire, bootstrapCTX, childSpec, listenToSpec, extenderPluginSpec) ->
 
     bootstrapCTX.wire(
-            listenToSpec
+            # listenToSpec
+            extenderPluginSpec
     ).then (childContext) ->
         console.log "resultCTX:", childContext

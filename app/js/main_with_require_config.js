@@ -79,14 +79,15 @@ require.config({
     "bootstrapSpec": "core/bootstrapSpec",
     "childSpec": "core/childSpec",
     "listenToSpec": "core/listenToSpec",
+    "extenderPluginSpec": "core/extenderPluginSpec",
     "mediator": "boot/mediator",
     "context/main": "withwire/context/main",
     "oneComponent": "withwire/components/oneComponent"
   }
 });
 
-require(["wire", "wire!bootstrapSpec", "childSpec", "listenToSpec", "overridden"], function(wire, bootstrapCTX, childSpec, listenToSpec) {
-  return bootstrapCTX.wire(listenToSpec).then(function(childContext) {
+require(["wire", "wire!bootstrapSpec", "childSpec", "listenToSpec", "extenderPluginSpec", "overridden"], function(wire, bootstrapCTX, childSpec, listenToSpec, extenderPluginSpec) {
+  return bootstrapCTX.wire(extenderPluginSpec).then(function(childContext) {
     return console.log("resultCTX:", childContext);
   });
 });

@@ -11,7 +11,7 @@ define [
 
     class SwitchControlView extends Marionette.CompositeView
 
-        template: "<div>---</div>"
+        template: "<ul></ul>"
 
         className: (res) ->
             # @defaultClassName("switchControl")
@@ -22,15 +22,14 @@ define [
 
         emptyView: NoItemsView
 
-        initialize: (options) ->
+        initialize: ->
 
-            # @model = new Backbone.Model
-            #     name: "switcher"
+            @model = new Backbone.Model
+                name: Marionette.getOption @, "name"
 
             @collection = new Backbone.Collection()
 
             bindKeyMethods.call(@)
-
 
             @on "itemview:checked", @onItemClick
             @on "itemview:infocus", @onInFocus
@@ -61,6 +60,8 @@ define [
             for option in @inputOptions
                 optionModel = new Backbone.Model(
                         name: option
+                        itemFocusedClass: @itemFocusedClass
+                        itemSelectedClass: @itemSelectedClass
                         index: modIndex++
                     )
                 @collection.add optionModel
@@ -84,7 +85,7 @@ define [
                 @onOutClick()
 
         hideInputs: ->
-            @children.each((item) =>
+            @children.each (item) =>
                     # input must participate in bypassing form by "tab" key pressing
                     # do not disactivate input if index = 0 - add class with "opacity", "0"
                     if item.model.get("index") == 0
@@ -92,7 +93,6 @@ define [
                     else
                         # .hide means disactivation - disactivate input
                         item.input.hide()
-                )
         
         # inFocus value manipulations
         onInFocus: (index) ->
@@ -144,8 +144,8 @@ define [
 
             @checkedItemIndex = index
 
-            @dataModel.set "name", @model.get "name"
-            @dataModel.set "data", _.keys(item.model.get("name"))[0]
+            @model.set "name", @model.get "name"
+            @model.set "data", _.keys(item.model.get("name"))[0]
 
             return item
 

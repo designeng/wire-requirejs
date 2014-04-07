@@ -96,6 +96,7 @@ require.config
         "bootstrapSpec": "core/bootstrapSpec"
         "childSpec": "core/childSpec"
         "listenToSpec": "core/listenToSpec"
+        "extenderPluginSpec": "core/extenderPluginSpec"
 
         # mediator
         "mediator": "boot/mediator"
