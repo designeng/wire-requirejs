@@ -1,7 +1,7 @@
 var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-define(["backbone", "marionette", "meld", "underscore.string"], function(Backbone, Marionette, Meld, _Str) {
+define(["backbone", "marionette", "meld"], function(Backbone, Marionette, Meld) {
   var NoItemsView, SwitchControlView, _ref;
   NoItemsView = Marionette.ItemView.extend({
     template: 'No options'
@@ -25,7 +25,27 @@ define(["backbone", "marionette", "meld", "underscore.string"], function(Backbon
     SwitchControlView.prototype.emptyView = NoItemsView;
 
     SwitchControlView.prototype.onUp = function() {
-      return console.log("------ON UP!!!");
+      return console.log("ON UP!!!", this);
+    };
+
+    SwitchControlView.prototype.onDown = function() {
+      return console.log("ON down!!!", this);
+    };
+
+    SwitchControlView.prototype.onLeft = function() {
+      return console.log("on LEFT", this);
+    };
+
+    SwitchControlView.prototype.onRight = function() {
+      return console.log("on RIGHT", this);
+    };
+
+    SwitchControlView.prototype.onSpace = function() {
+      return console.log("on Space", this);
+    };
+
+    SwitchControlView.prototype.onTab = function() {
+      return console.log("on Tab", this);
     };
 
     SwitchControlView.prototype.initialize = function() {

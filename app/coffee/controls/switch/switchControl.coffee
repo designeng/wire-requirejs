@@ -2,8 +2,7 @@ define [
     "backbone"
     "marionette"
     "meld"
-    "underscore.string"
-], (Backbone, Marionette, Meld, _Str) -> 
+], (Backbone, Marionette, Meld) -> 
 
     NoItemsView = Marionette.ItemView.extend
         template: 'No options'                
@@ -22,7 +21,22 @@ define [
         emptyView: NoItemsView
 
         onUp: ->
-            console.log "------ON UP!!!"
+            console.log "ON UP!!!", @
+
+        onDown: ->
+            console.log "ON down!!!", @
+
+        onLeft: ->
+            console.log "on LEFT", @
+
+        onRight: ->
+            console.log "on RIGHT", @
+
+        onSpace: ->
+            console.log "on Space", @
+
+        onTab: ->
+            console.log "on Tab", @
 
         initialize: ->
 
@@ -42,19 +56,6 @@ define [
             console.log "show after init", target
             return target
 
-        # createMethods: ->
-        #     @_removers = []
-        #     for evt in @keyEvents
-        #         methodName = @_getMethodName evt
-
-        #         if !@[methodName]
-        #             @[methodName] = (e) =>
-        #                 # blank funcion
-
-        #         console.log "createMethods::::", methodName
-        #         remover = Meld.after @, methodName, "afterKeyPressed"
-        #         @_removers.push remover # remember all aspects here to remove in "beforeClose" view method
-
         onBeforeRender: -> 
             modIndex = 0
 
@@ -70,10 +71,6 @@ define [
 
         onRender: -> 
             @hideInputs() unless @_showInputs
-
-            # _.each @keyEvents, (evt) => 
-            #     console.log "EVENT::::---->", evt      
-            #     @keyOn evt, @_bindKeyEventToMethod(@_getMethodName evt)
 
             if _.isNumber @_startIndex
                 @chooseItem @_startIndex
@@ -153,9 +150,3 @@ define [
         onClose: ->
             _.each @keyEvents, (evt) =>
                 @keyOff evt
-
-        # _getMethodName: (string) ->
-        #     return "on" + _Str.classify.call(@, string)
-
-        # _bindKeyEventToMethod: (methodName) ->
-        #     return @[methodName]

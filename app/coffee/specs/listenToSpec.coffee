@@ -5,11 +5,9 @@ define
         "listenTo"
         "core/plugin/extender"
         "core/plugin/localizer"
-        "core/plugin/keyactive"
+        # "core/plugin/keyactive"
+        "core/plugin/mousetrapPlugin"
     ]
-
-    keysViewMixin:
-        module: "keysviewmixin"
 
     globalEvents:
         create:
@@ -37,16 +35,10 @@ define
         properties:
             # defaultClassName: "mixins/defaultClassName"
             itemView: {$ref: 'switchItemView'}
-            # keyEvents: ["up", "down", "left", "right", "space", "tab"]
-
             inputOptions: ["loc_One", "loc_Two", "loc_Three"]  # @prepareLocalized(@_inputOptions, "object") - must be in outer service - prepare template before injecting            
             showInputs: true
             # startIndex:
 
-        # init:
-        #     createMethods: {}
-
-        # keys: ["up", "down", "left", "right", "space", "tab"]
         keys: ["up", "down", "left", "right", "space", "tab"]
 
         listenTo:
@@ -63,7 +55,3 @@ define
 
         destroy:
             triggerMethod: "close"
-
-        mixin: [
-            {$ref: "keysViewMixin"}
-        ]

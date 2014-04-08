@@ -1,8 +1,5 @@
 define({
-  $plugins: ["wire/debug", "wire/connect", "listenTo", "core/plugin/extender", "core/plugin/localizer", "core/plugin/keyactive"],
-  keysViewMixin: {
-    module: "keysviewmixin"
-  },
+  $plugins: ["wire/debug", "wire/connect", "listenTo", "core/plugin/extender", "core/plugin/localizer", "core/plugin/mousetrapPlugin"],
   globalEvents: {
     create: {
       module: "mixins/globalEvents"
@@ -58,11 +55,6 @@ define({
     },
     destroy: {
       triggerMethod: "close"
-    },
-    mixin: [
-      {
-        $ref: "keysViewMixin"
-      }
-    ]
+    }
   }
 });

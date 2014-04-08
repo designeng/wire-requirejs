@@ -25,16 +25,20 @@ define [
 
                             target.keys = {} unless _.isEmpty keys
 
+                            _.each keys, (evt) =>   
+                                # target.keyOn evt, bindKeyEventToMethod.call(target, getMethodName(evt))
+                                target.keyOn evt, getMethodName(evt)
+
                             # _.each keys, (evt) =>   
                             #     # target.keyOn evt, bindKeyEventToMethod.call(target, getMethodName(evt))
                             #     target.keys[evt] = getMethodName(evt)
 
-                            for evt in keys
-                                methodName = getMethodName evt
+                            # for evt in keys
+                            #     methodName = getMethodName evt
 
-                                if ! target[methodName]
-                                    target[methodName] = (e) =>
-                                        console.log "EVENT:::", e
+                            #     if ! target[methodName]
+                            #         target[methodName] = (e) =>
+                            #             console.log "EVENT:::", e
                                         # blank funcion
 
                         

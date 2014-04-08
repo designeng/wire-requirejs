@@ -7,5 +7,6 @@ define ->
 
         # "resultTableFilter/index"
         # "mixin/index"
-        "mixin/onHtmlClickMixin"
+        # "mixin/onHtmlClickMixin"
+        "mixin/keyactive/keyactivePlugin"
     ]

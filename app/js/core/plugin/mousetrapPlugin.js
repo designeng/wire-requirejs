@@ -1,11 +1,12 @@
-define(["underscore", "keysviewmixin", "when", "underscore.string"], function(_, keysViewMixin, When, _Str) {
-  var bindKeyEventToMethod, getMethodName;
+define(["underscore", "mousetrap", "when", "underscore.string"], function(_, Mousetrap, When, _Str) {
+  var bindKeyEventToMethod, getMethodName, noop;
   bindKeyEventToMethod = function(methodName) {
     return this[methodName];
   };
   getMethodName = function(str) {
     return "on" + _Str.classify.call(this, str);
   };
+  noop = function() {};
   return function(options) {
     var addKeyBehavior, injectKeysBehaviorFacet;
     addKeyBehavior = function(facet, options, wire) {
@@ -14,19 +15,18 @@ define(["underscore", "keysviewmixin", "when", "underscore.string"], function(_,
       return When(wire({
         options: facet.options
       }), function(options) {
-        return wire.loadModule(keysViewMixin).then(function(Module) {
-          var keys,
-            _this = this;
-          _.extend(target, Module);
-          keys = facet.options;
-          if (!_.isEmpty(keys)) {
-            target.keys = {};
+        var key, keys, methodName, _i, _len;
+        keys = facet.options;
+        for (_i = 0, _len = keys.length; _i < _len; _i++) {
+          key = keys[_i];
+          methodName = getMethodName(key);
+          if (!target[methodName]) {
+            target[methodName] = noop;
           }
-          _.each(keys, function(evt) {
-            return target.keyOn(evt, getMethodName(evt));
-          });
-          return target;
-        });
+          _.bindAll(target, methodName);
+          Mousetrap.bind(key, target[methodName]);
+        }
+        return target;
       });
     };
     injectKeysBehaviorFacet = function(resolver, facet, wire) {

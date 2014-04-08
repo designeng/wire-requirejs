@@ -59,11 +59,16 @@ require.config
             main: "Backbone.CollectionBinder"
             location: "../../bower_components/Backbone.ModelBinder"
         }, 
+        # {
+        #     name: "keysviewmixin"
+        #     main: "backbone.keys.mixin"
+        #     location: "../../bower_components/keysviewmixin"
+        # },
         {
-            name: "keysviewmixin"
-            main: "backbone.keys.mixin"
-            location: "../../bower_components/keysviewmixin"
-        },        
+            name: "mousetrap"
+            main: "mousetrap"
+            location: "../../bower_components/mousetrap"
+        },      
         {
             name: "jquery"
             main: "jquery"
