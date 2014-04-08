@@ -1,7 +1,7 @@
 var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-define(["backbone", "marionette", "meld", "controls/switch/init/bindKeyMethods", "underscore.string"], function(Backbone, Marionette, Meld, bindKeyMethods, _Str) {
+define(["backbone", "marionette", "meld", "underscore.string"], function(Backbone, Marionette, Meld, _Str) {
   var NoItemsView, SwitchControlView, _ref;
   NoItemsView = Marionette.ItemView.extend({
     template: 'No options'
@@ -24,12 +24,15 @@ define(["backbone", "marionette", "meld", "controls/switch/init/bindKeyMethods",
 
     SwitchControlView.prototype.emptyView = NoItemsView;
 
+    SwitchControlView.prototype.onUp = function() {
+      return console.log("------ON UP!!!");
+    };
+
     SwitchControlView.prototype.initialize = function() {
       this.model = new Backbone.Model({
         name: Marionette.getOption(this, "name")
       });
       this.collection = new Backbone.Collection();
-      bindKeyMethods.call(this);
       this.on("itemview:checked", this.onItemClick);
       this.on("itemview:infocus", this.onInFocus);
       this.on("itemview:inblur", this.onInBlur);
@@ -39,24 +42,6 @@ define(["backbone", "marionette", "meld", "controls/switch/init/bindKeyMethods",
     SwitchControlView.prototype.show = function(target) {
       console.log("show after init", target);
       return target;
-    };
-
-    SwitchControlView.prototype.createMethods = function() {
-      var evt, methodName, remover, _i, _len, _ref1, _results,
-        _this = this;
-      this._removers = [];
-      _ref1 = this.keyEvents;
-      _results = [];
-      for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
-        evt = _ref1[_i];
-        methodName = this._getMethodName(evt);
-        if (!this[methodName]) {
-          this[methodName] = function(e) {};
-        }
-        remover = Meld.after(this, methodName, "afterKeyPressed");
-        _results.push(this._removers.push(remover));
-      }
-      return _results;
     };
 
     SwitchControlView.prototype.onBeforeRender = function() {
@@ -77,13 +62,9 @@ define(["backbone", "marionette", "meld", "controls/switch/init/bindKeyMethods",
     };
 
     SwitchControlView.prototype.onRender = function() {
-      var _this = this;
       if (!this._showInputs) {
         this.hideInputs();
       }
-      _.each(this._keyEvents, function(evt) {
-        return _this.keyOn(evt, _this._bindKeyEventToMethod(_this._getMethodName(evt)));
-      });
       if (_.isNumber(this._startIndex)) {
         return this.chooseItem(this._startIndex);
       }
@@ -131,6 +112,7 @@ define(["backbone", "marionette", "meld", "controls/switch/init/bindKeyMethods",
     };
 
     SwitchControlView.prototype.afterKeyPressed = function(key) {
+      console.log("KEY PRESSED", key);
       if (!this.inFocus) {
         return;
       }
@@ -172,17 +154,9 @@ define(["backbone", "marionette", "meld", "controls/switch/init/bindKeyMethods",
 
     SwitchControlView.prototype.onClose = function() {
       var _this = this;
-      return _.each(this._keyEvents, function(evt) {
+      return _.each(this.keyEvents, function(evt) {
         return _this.keyOff(evt);
       });
-    };
-
-    SwitchControlView.prototype._getMethodName = function(string) {
-      return "on" + _Str.classify.call(this, string);
-    };
-
-    SwitchControlView.prototype._bindKeyEventToMethod = function(methodName) {
-      return this[methodName];
     };
 
     return SwitchControlView;

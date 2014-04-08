@@ -2,9 +2,8 @@ define [
     "backbone"
     "marionette"
     "meld"
-    "controls/switch/init/bindKeyMethods"
     "underscore.string"
-], (Backbone, Marionette, Meld, bindKeyMethods, _Str) -> 
+], (Backbone, Marionette, Meld, _Str) -> 
 
     NoItemsView = Marionette.ItemView.extend
         template: 'No options'                
@@ -22,14 +21,15 @@ define [
 
         emptyView: NoItemsView
 
+        onUp: ->
+            console.log "------ON UP!!!"
+
         initialize: ->
 
             @model = new Backbone.Model
                 name: Marionette.getOption @, "name"
 
             @collection = new Backbone.Collection()
-
-            bindKeyMethods.call(@)
 
             @on "itemview:checked", @onItemClick
             @on "itemview:infocus", @onInFocus
@@ -42,17 +42,18 @@ define [
             console.log "show after init", target
             return target
 
-        createMethods: ->
-            @_removers = []
-            for evt in @keyEvents
-                methodName = @_getMethodName evt
+        # createMethods: ->
+        #     @_removers = []
+        #     for evt in @keyEvents
+        #         methodName = @_getMethodName evt
 
-                if !@[methodName]
-                    @[methodName] = (e) =>
-                        # blank funcion
+        #         if !@[methodName]
+        #             @[methodName] = (e) =>
+        #                 # blank funcion
 
-                remover = Meld.after @, methodName, "afterKeyPressed"
-                @_removers.push remover # remember all aspects here to remove in "beforeClose" view method
+        #         console.log "createMethods::::", methodName
+        #         remover = Meld.after @, methodName, "afterKeyPressed"
+        #         @_removers.push remover # remember all aspects here to remove in "beforeClose" view method
 
         onBeforeRender: -> 
             modIndex = 0
@@ -70,8 +71,9 @@ define [
         onRender: -> 
             @hideInputs() unless @_showInputs
 
-            _.each @_keyEvents, (evt) =>          
-                @keyOn evt, @_bindKeyEventToMethod(@_getMethodName evt)
+            # _.each @keyEvents, (evt) => 
+            #     console.log "EVENT::::---->", evt      
+            #     @keyOn evt, @_bindKeyEventToMethod(@_getMethodName evt)
 
             if _.isNumber @_startIndex
                 @chooseItem @_startIndex
@@ -113,6 +115,7 @@ define [
 
         # works as after-aspect with all key handlers (see bindKeyMethods)
         afterKeyPressed: (key) ->
+            console.log "KEY PRESSED", key
             if !@inFocus
                 return
 
@@ -148,11 +151,11 @@ define [
             return item
 
         onClose: ->
-            _.each @_keyEvents, (evt) =>
+            _.each @keyEvents, (evt) =>
                 @keyOff evt
 
-        _getMethodName: (string) ->
-            return "on" + _Str.classify.call(@, string)
+        # _getMethodName: (string) ->
+        #     return "on" + _Str.classify.call(@, string)
 
-        _bindKeyEventToMethod: (methodName) ->
-            return @[methodName]
+        # _bindKeyEventToMethod: (methodName) ->
+        #     return @[methodName]

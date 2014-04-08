@@ -6,17 +6,19 @@ define ->
         onLeft: (e) ->
             return "left"
 
-        onRight: (e) ->
-            return "right"  
+        # onRight: (e) ->
+        #     console.log "right!!!!" 
+        #     return "right"  
 
-        onUp: (e) ->            
-            return "up"
+        # onUp: (e) -> 
+        #     console.log "UP!!!!"           
+        #     return "up"
 
-        onDown: (e) -> 
-            return "down"
+        # onDown: (e) -> 
+        #     return "down"
 
-        onTab: (e) ->
-            return "tab"
+        # onTab: (e) ->
+        #     return "tab"
             
     }
 

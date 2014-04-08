@@ -6,18 +6,6 @@ define(function() {
     },
     onLeft: function(e) {
       return "left";
-    },
-    onRight: function(e) {
-      return "right";
-    },
-    onUp: function(e) {
-      return "up";
-    },
-    onDown: function(e) {
-      return "down";
-    },
-    onTab: function(e) {
-      return "tab";
     }
   };
   bindKeyMethods = function(keyEvents) {

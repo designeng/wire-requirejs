@@ -62,7 +62,7 @@ require.config
         {
             name: "keysviewmixin"
             main: "backbone.keys.mixin"
-            location: "../../bower_components/backbone.keys"
+            location: "../../bower_components/keysviewmixin"
         },        
         {
             name: "jquery"

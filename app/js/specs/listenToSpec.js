@@ -1,5 +1,8 @@
 define({
-  $plugins: ["wire/debug", "wire/connect", "listenTo", "core/plugin/extender", "core/plugin/localizer"],
+  $plugins: ["wire/debug", "wire/connect", "listenTo", "core/plugin/extender", "core/plugin/localizer", "core/plugin/keyactive"],
+  keysViewMixin: {
+    module: "keysviewmixin"
+  },
   globalEvents: {
     create: {
       module: "mixins/globalEvents"
@@ -35,13 +38,10 @@ define({
       itemView: {
         $ref: 'switchItemView'
       },
-      keyEvents: ["up", "down", "left", "right", "space", "tab"],
       inputOptions: ["loc_One", "loc_Two", "loc_Three"],
       showInputs: true
     },
-    init: {
-      createMethods: {}
-    },
+    keys: ["up", "down", "left", "right", "space", "tab"],
     listenTo: {
       globalEvents: {
         "html:click": "onHtmlClick"
@@ -58,6 +58,11 @@ define({
     },
     destroy: {
       triggerMethod: "close"
-    }
+    },
+    mixin: [
+      {
+        $ref: "keysViewMixin"
+      }
+    ]
   }
 });
