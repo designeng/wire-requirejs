@@ -46,6 +46,10 @@ require.config({
       main: "Backbone.CollectionBinder",
       location: "../../bower_components/Backbone.ModelBinder"
     }, {
+      name: "keysviewmixin",
+      main: "backbone.keys.mixin",
+      location: "../../bower_components/backbone.keys"
+    }, {
       name: "jquery",
       main: "jquery",
       location: "../../bower_components/jquery/dist"
@@ -76,10 +80,10 @@ require.config({
   },
   paths: {
     "domReady": "../../bower_components/domReady/domReady",
-    "bootstrapSpec": "core/bootstrapSpec",
-    "childSpec": "core/childSpec",
-    "listenToSpec": "core/listenToSpec",
-    "extenderPluginSpec": "core/extenderPluginSpec",
+    "bootstrapSpec": "specs/bootstrapSpec",
+    "childSpec": "specs/childSpec",
+    "listenToSpec": "specs/listenToSpec",
+    "extenderPluginSpec": "specs/extenderPluginSpec",
     "mediator": "boot/mediator",
     "context/main": "withwire/context/main",
     "oneComponent": "withwire/components/oneComponent"
