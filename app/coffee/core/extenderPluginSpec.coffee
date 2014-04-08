@@ -7,8 +7,8 @@ define
 
     switchItemView:
         extend:
-            originalModule: "controls/switch/item/switchItemView"
-            fields:
+            module: "controls/switch/item/switchItemView"
+            with:
                 itemSelectedClass: "one123"
                 itemFocusedClass: "two123"
 

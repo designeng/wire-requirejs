@@ -3,17 +3,17 @@ var __hasProp = {}.hasOwnProperty,
 
 define(["underscore", "when"], function(_, When) {
   return function(options) {
-    var extendProto, injectProperties;
-    extendProto = function(componentDefinition, wire) {
+    var extend, extendWithFactory;
+    extend = function(componentDefinition, wire) {
       return When.promise(function(resolve) {
-        if (!componentDefinition.options.fields) {
-          throw "no fields option specified";
+        if (!componentDefinition.options["with"]) {
+          throw "no 'with' option specified";
         }
-        if (componentDefinition.options.originalModule) {
-          return wire.loadModule(componentDefinition.options.originalModule).then(function(Module) {
+        if (componentDefinition.options.module) {
+          return wire.loadModule(componentDefinition.options.module).then(function(Module) {
             var Extended, i, key, _i, _keys, _len, _ref, _values;
-            _keys = _.keys(componentDefinition.options.fields);
-            _values = _.values(componentDefinition.options.fields);
+            _keys = _.keys(componentDefinition.options["with"]);
+            _values = _.values(componentDefinition.options["with"]);
             Extended = (function(_super) {
               __extends(Extended, _super);
 
@@ -33,15 +33,15 @@ define(["underscore", "when"], function(_, When) {
             }
             return resolve(Extended);
           }, function(error) {
-            return console.error(error);
+            return reject(error);
           });
         } else {
-          throw "no originalModule option specified";
+          throw "no 'module' option specified";
         }
       });
     };
-    injectProperties = function(resolver, componentDefinition, wire) {
-      return extendProto(componentDefinition, wire).then(function(extended) {
+    extendWithFactory = function(resolver, componentDefinition, wire) {
+      return extend(componentDefinition, wire).then(function(extended) {
         return resolver.resolve(extended);
       }, function(error) {
         return console.error(error.stack);
@@ -54,7 +54,7 @@ define(["underscore", "when"], function(_, When) {
         }
       },
       factories: {
-        extend: injectProperties
+        extend: extendWithFactory
       }
     };
   };

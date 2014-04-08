@@ -50,7 +50,6 @@ define [
             console.log "READY:", arg
 
         onRender: ->
-            console.log "@itemSelectedClass", @itemSelectedClass
 
             @input = @$el.find("input")
             @label = @$el.find("label")

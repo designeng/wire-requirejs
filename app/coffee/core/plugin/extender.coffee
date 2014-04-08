@@ -5,21 +5,20 @@ define [
 
     return (options) ->
 
-        extendProto = (componentDefinition, wire) ->
+        extend = (componentDefinition, wire) ->
 
-            # Did user supply a new routerclass (instead of Backbone default)
             When.promise (resolve) ->
-                if !componentDefinition.options.fields
-                    throw "no fields option specified"
+                if !componentDefinition.options.with
+                    throw "no 'with' option specified"
 
-                if componentDefinition.options.originalModule
-                    wire.loadModule(componentDefinition.options.originalModule).then (Module) ->
+                if componentDefinition.options.module
+                    wire.loadModule(componentDefinition.options.module).then (Module) ->
 
-                        _keys = _.keys componentDefinition.options.fields
-                        _values = _.values componentDefinition.options.fields
+                        _keys = _.keys componentDefinition.options.with
+                        _values = _.values componentDefinition.options.with
 
                         class Extended extends Module
-                            # no fields yet
+                            # no new fields yet
 
                         i = 0
                         for key in _keys
@@ -28,12 +27,12 @@ define [
 
                         resolve Extended
                     , (error) ->
-                        console.error error
+                        reject error
                 else
-                    throw "no originalModule option specified"
+                    throw "no 'module' option specified"
 
-        injectProperties = (resolver, componentDefinition, wire) ->
-            extendProto(componentDefinition, wire).then (extended) ->
+        extendWithFactory = (resolver, componentDefinition, wire) ->
+            extend(componentDefinition, wire).then (extended) ->
                 resolver.resolve(extended)
             , (error) ->
                 console.error error.stack
@@ -43,4 +42,4 @@ define [
                 resolver.resolve()
 
         factories: 
-            extend: injectProperties
+            extend: extendWithFactory

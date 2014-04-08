@@ -1,5 +1,5 @@
 define({
-  $plugins: ["wire/debug", "wire/connect", "listenTo"],
+  $plugins: ["wire/debug", "wire/connect", "listenTo", "core/plugin/extender", "core/plugin/localizer"],
   globalEvents: {
     create: {
       module: "mixins/globalEvents"
@@ -16,7 +16,13 @@ define({
     }
   },
   switchItemView: {
-    module: "controls/switch/item/switchItemView"
+    extend: {
+      module: "controls/switch/item/switchItemView",
+      "with": {
+        itemSelectedClass: "switchItem__selected",
+        itemFocusedClass: "switchItem__focused"
+      }
+    }
   },
   switcher: {
     create: {
@@ -31,8 +37,6 @@ define({
       },
       keyEvents: ["up", "down", "left", "right", "space", "tab"],
       inputOptions: ["loc_One", "loc_Two", "loc_Three"],
-      itemFocusedClass: "switchItem__focused",
-      itemSelectedClass: "switchItem__selected",
       showInputs: true
     },
     init: {
@@ -43,6 +47,7 @@ define({
         "html:click": "onHtmlClick"
       }
     },
+    localize: "template",
     connect: {
       "show": 'bootApp.showView'
     },

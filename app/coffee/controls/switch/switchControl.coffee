@@ -11,7 +11,7 @@ define [
 
     class SwitchControlView extends Marionette.CompositeView
 
-        template: "<ul></ul>"
+        template: "<ul>${loc_test}</ul>"
 
         className: (res) ->
             # @defaultClassName("switchControl")
@@ -60,8 +60,6 @@ define [
             for option in @inputOptions
                 optionModel = new Backbone.Model(
                         name: option
-                        itemFocusedClass: @itemFocusedClass
-                        itemSelectedClass: @itemSelectedClass
                         index: modIndex++
                     )
                 @collection.add optionModel

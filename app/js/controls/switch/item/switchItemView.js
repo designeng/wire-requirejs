@@ -65,7 +65,6 @@ define(["marionette"], function(Marionette) {
     };
 
     SwitchItemView.prototype.onRender = function() {
-      console.log("@itemSelectedClass", this.itemSelectedClass);
       this.input = this.$el.find("input");
       this.label = this.$el.find("label");
       this.index = this.model.get("index");

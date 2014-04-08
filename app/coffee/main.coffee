@@ -8,7 +8,7 @@ require [
 ], (wire, bootstrapCTX, childSpec, listenToSpec, extenderPluginSpec) ->
 
     bootstrapCTX.wire(
-            # listenToSpec
-            extenderPluginSpec
+            listenToSpec
+            # extenderPluginSpec
     ).then (childContext) ->
         console.log "resultCTX:", childContext

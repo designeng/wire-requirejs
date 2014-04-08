@@ -14,7 +14,7 @@ define(["backbone", "marionette", "meld", "controls/switch/init/bindKeyMethods",
       return _ref;
     }
 
-    SwitchControlView.prototype.template = "<ul></ul>";
+    SwitchControlView.prototype.template = "<ul>${loc_test}</ul>";
 
     SwitchControlView.prototype.className = function(res) {
       return "switchControl";
@@ -67,8 +67,6 @@ define(["backbone", "marionette", "meld", "controls/switch/init/bindKeyMethods",
         option = _ref1[_i];
         optionModel = new Backbone.Model({
           name: option,
-          itemFocusedClass: this.itemFocusedClass,
-          itemSelectedClass: this.itemSelectedClass,
           index: modIndex++
         });
         this.collection.add(optionModel);

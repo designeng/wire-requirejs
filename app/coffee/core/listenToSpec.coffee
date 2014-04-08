@@ -3,6 +3,8 @@ define
         "wire/debug"
         "wire/connect"
         "listenTo"
+        "core/plugin/extender"
+        "core/plugin/localizer"
     ]
 
     globalEvents:
@@ -17,11 +19,11 @@ define
                 "html:click": "onHtmlClick"
 
     switchItemView:
-        module: "controls/switch/item/switchItemView"
-            
-        # ready:
-        #     "log": "test"
-
+        extend:
+            module: "controls/switch/item/switchItemView"
+            with:
+                itemSelectedClass: "switchItem__selected"
+                itemFocusedClass: "switchItem__focused"
 
     switcher:
         create: 
@@ -32,11 +34,7 @@ define
             # defaultClassName: "mixins/defaultClassName"
             itemView: {$ref: 'switchItemView'}
             keyEvents: ["up", "down", "left", "right", "space", "tab"]
-            inputOptions: ["loc_One", "loc_Two", "loc_Three"]  # @prepareLocalized(@_inputOptions, "object") - must be in outer service - prepare template before injecting
-
-            itemFocusedClass: "switchItem__focused"
-            itemSelectedClass: "switchItem__selected"
-            
+            inputOptions: ["loc_One", "loc_Two", "loc_Three"]  # @prepareLocalized(@_inputOptions, "object") - must be in outer service - prepare template before injecting            
             showInputs: true
             # startIndex:
 
@@ -50,6 +48,8 @@ define
         listenTo:
             globalEvents:
                 "html:click": "onHtmlClick"
+
+        localize: "template"
 
         connect: 
             "show": 'bootApp.showView'
