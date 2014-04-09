@@ -1,0 +1,38 @@
+<form class="edit-client-data-view">
+    <fieldset>
+        <label>
+            <span>${firstName}</span>
+            <input type="text" class="first-name" name="firstName"/>
+        </label>
+        <label>
+            <span>${lastName}</span>
+            <input type="text" class="last-name" name="lastName"/>
+        </label>
+        <label>
+            <span>${dateOfBirth}</span>
+            <input type="text" name="dateOfBirth">
+        </label>
+        <label>
+            <span>${citizenship}</span>
+            <input type="text" name="citizenship">
+        </label>
+        <label>
+            <span>${documentNumber}</span>
+            <input type="text" name="documentNumber">
+        </label>
+        <label>
+            <!-- срок действия -->
+            <span>${validity}</span>
+            <input type="submit" value="${chooseDate}" name="validity">
+            <!-- / срок действия -->
+        </label>
+        <label>
+            <span>${loyaltyCardAirlines}</span>
+            <input type="text" name="loyaltyCardAirlines">
+        </label>
+        <label>
+            <!-- срок действия -->
+            <input type="submit" value="${save}" name="save">
+        </label>
+    </fieldset>
+</form>

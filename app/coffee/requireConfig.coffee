@@ -107,6 +107,7 @@ require.config
         "childSpec": "specs/childSpec"
         "listenToSpec": "specs/listenToSpec"
         "extenderPluginSpec": "specs/extenderPluginSpec"
+        "clientDataSpec": "modules/clientdata/clientDataSpec"
 
         # mediator
         "mediator": "boot/mediator"

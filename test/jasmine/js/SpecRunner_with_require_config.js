@@ -84,6 +84,7 @@ require.config({
     "childSpec": "specs/childSpec",
     "listenToSpec": "specs/listenToSpec",
     "extenderPluginSpec": "specs/extenderPluginSpec",
+    "clientDataSpec": "modules/clientdata/clientDataSpec",
     "mediator": "boot/mediator",
     "context/main": "withwire/context/main",
     "oneComponent": "withwire/components/oneComponent"
