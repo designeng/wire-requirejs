@@ -20,25 +20,17 @@ define
 
         properties:
             template: {$ref: 'clientFormTpl'}
+            _form: {$ref: 'form'}
 
         localize: "template"
 
-        # rendering way must be improved
+        # just a rendering in bootApp... hack, must be redesigned - way must be improved
         ready:
             "show": {$ref:'clientEditView'}
+            "log" : "_form"
+            "getValues": {}
         connect:
             'show': 'bootApp.showView'
-
-    # clientEditView:
-    #     render:
-    #         template: { module: 'text!/app/templates/clientdata/template.html' }
-    #     on:
-    #         submit: 'form.getValues'
-    #     insert: 
-    #         first: 'clientFormContainer'
-        # connect: {
-        #     'contactsCollection.onChange': 'reset'
-        # }
 
     # herpers
     form: 

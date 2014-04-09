@@ -114,6 +114,7 @@ define(["wire", "marionette", "text!./fixtures/resultTpl.html"], function(wire, 
       });
     });
     it("filter", function(done) {
+      console.log("CTX", this.ctx);
       expect(this.ctx.filter).toBeDefined();
       return done();
     });

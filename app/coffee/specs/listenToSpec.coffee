@@ -5,7 +5,6 @@ define
         "listenTo"
         "core/plugin/extender"
         "core/plugin/localizer"
-        # "core/plugin/keyactive"
         "core/plugin/mousetrapPlugin"
     ]
 
@@ -37,7 +36,6 @@ define
             itemView: {$ref: 'switchItemView'}
             inputOptions: ["loc_One", "loc_Two", "loc_Three"]  # @prepareLocalized(@_inputOptions, "object") - must be in outer service - prepare template before injecting            
             showInputs: true
-            # startIndex:
 
         keys: ["up", "down", "left", "right", "space", "tab"]
 

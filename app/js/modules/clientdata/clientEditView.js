@@ -18,8 +18,17 @@ define(["marionette"], function(Marionette) {
     };
 
     ClientEditView.prototype.show = function(target) {
-      console.log("TEMPLATE", this.template);
       return target;
+    };
+
+    ClientEditView.prototype.log = function(prop) {
+      return console.log("PROP:", this[prop]);
+    };
+
+    ClientEditView.prototype.getValues = function() {
+      var res;
+      res = this._form.getValues();
+      return console.log(res);
     };
 
     return ClientEditView;

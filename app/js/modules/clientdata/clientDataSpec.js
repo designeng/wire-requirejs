@@ -10,13 +10,18 @@ define({
     properties: {
       template: {
         $ref: 'clientFormTpl'
+      },
+      _form: {
+        $ref: 'form'
       }
     },
     localize: "template",
     ready: {
       "show": {
         $ref: 'clientEditView'
-      }
+      },
+      "log": "_form",
+      "getValues": {}
     },
     connect: {
       'show': 'bootApp.showView'

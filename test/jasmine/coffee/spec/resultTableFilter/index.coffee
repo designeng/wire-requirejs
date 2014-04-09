@@ -79,6 +79,7 @@ define [
                 console.log "ERROR", err
 
         it "filter", (done) ->
+            console.log "CTX", @ctx
             expect(@ctx.filter).toBeDefined()
             done()
         it "table", (done) ->

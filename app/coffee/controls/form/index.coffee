@@ -1,2 +1,0 @@
-# form index file
-define [], () ->
