@@ -58,6 +58,10 @@ require.config({
       main: "text",
       location: "../../bower_components/text"
     }, {
+      name: "i18n",
+      main: "i18n",
+      location: "../../bower_components/requirejs-i18n"
+    }, {
       name: "listenTo",
       main: "listenTo",
       location: "../../bower_components/listenTo"
@@ -88,5 +92,6 @@ require.config({
     "mediator": "boot/mediator",
     "context/main": "withwire/context/main",
     "oneComponent": "withwire/components/oneComponent"
-  }
+  },
+  locale: "ru"
 });

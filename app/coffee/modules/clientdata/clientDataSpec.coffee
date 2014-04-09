@@ -6,6 +6,7 @@ define
         "wire/connect"
         "wire/aop"
         "cola"
+        "core/plugin/localizer"
     ]
 
     # clientFormContainer: 
@@ -19,6 +20,8 @@ define
 
         properties:
             template: {$ref: 'clientFormTpl'}
+
+        localize: "template"
 
         # rendering way must be improved
         ready:

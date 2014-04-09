@@ -1,4 +1,4 @@
-define(["underscore", "when"], function(_, When) {
+define(["underscore", "when", "i18n!nls/general"], function(_, When, localized) {
   return function(options) {
     var doLocalize, localizeFacet;
     doLocalize = function(facet, options, wire) {
@@ -10,7 +10,9 @@ define(["underscore", "when"], function(_, When) {
       }), function(options) {
         var res, whatToLocalize;
         whatToLocalize = _.result(target, facet.options);
-        res = whatToLocalize.replace(parseTemplateRx, "localized!");
+        res = whatToLocalize.replace(parseTemplateRx, function(m, token) {
+          return localized[token];
+        });
         target[facet.options] = res;
         return target;
       });

@@ -1,7 +1,8 @@
 define [
 	"underscore"
     "when"
-], (_, When) ->
+    "i18n!nls/general"
+], (_, When, localized) ->
 
     return (options) ->
 
@@ -12,7 +13,9 @@ define [
             return When(wire({options: facet.options}),
                     (options) ->
                         whatToLocalize = _.result target, facet.options
-                        res = whatToLocalize.replace(parseTemplateRx, "localized!")
+                        res = whatToLocalize.replace(parseTemplateRx, (m, token) ->
+                                return localized[token]
+                            )
 
                         target[facet.options] = res
                         return target
