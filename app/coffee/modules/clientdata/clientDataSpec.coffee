@@ -9,8 +9,6 @@ define
         "core/plugin/localizer"
     ]
 
-    # clientFormContainer: 
-
     clientFormTpl:
         module: 'text!/app/templates/clientdata/template.html'
 
@@ -20,6 +18,7 @@ define
 
         properties:
             template: {$ref: 'clientFormTpl'}
+            formSelector: ".edit-client-data-view"
             _form: {$ref: 'form'}
 
         localize: "template"

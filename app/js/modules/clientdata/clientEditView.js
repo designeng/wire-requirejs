@@ -11,7 +11,13 @@ define(["marionette"], function(Marionette) {
       return _ref;
     }
 
-    ClientEditView.prototype.template = null;
+    ClientEditView.prototype.template = void 0;
+
+    ClientEditView.prototype.formSelector = void 0;
+
+    ClientEditView.prototype.events = {
+      "click .save": "onClick"
+    };
 
     ClientEditView.prototype.initialize = function() {
       return console.log("ClientEditView inited");
@@ -25,10 +31,16 @@ define(["marionette"], function(Marionette) {
       return console.log("PROP:", this[prop]);
     };
 
+    ClientEditView.prototype.onClick = function(e) {
+      this.getValues();
+      return false;
+    };
+
     ClientEditView.prototype.getValues = function() {
-      var res;
-      res = this._form.getValues();
-      return console.log(res);
+      var form, res;
+      form = this.$el.find(this.formSelector)[0];
+      res = this._form.getValues(form);
+      return console.log("RESULT:::", res);
     };
 
     return ClientEditView;

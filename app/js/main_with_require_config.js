@@ -46,6 +46,10 @@ require.config({
       main: "Backbone.CollectionBinder",
       location: "../../bower_components/Backbone.ModelBinder"
     }, {
+      name: "Bacon",
+      main: "bacon",
+      location: "../../bower_components/bacon/dist/bacon.min"
+    }, {
       name: "mousetrap",
       main: "mousetrap",
       location: "../../bower_components/mousetrap"

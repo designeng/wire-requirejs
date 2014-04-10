@@ -14,6 +14,7 @@
     "Backbone.ModelBinder": "~1.0.5",
     "listenTo": "git://github.com/designeng/listenTo.git",
     "underscore.string": "~2.3.3",
-    "requirejs-i18n": "~2.0.4"
+    "requirejs-i18n": "~2.0.4",
+    "bacon": "~0.7.10"
   }
 }

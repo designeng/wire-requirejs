@@ -4,7 +4,13 @@ define [
     class ClientEditView extends Marionette.Layout
 
         # @injected
-        template: null
+        template: undefined
+
+        # @injected
+        formSelector: undefined
+
+        events:
+            "click .save": "onClick"       
 
         initialize: ->
             console.log "ClientEditView inited"
@@ -16,6 +22,11 @@ define [
         log: (prop) ->
             console.log "PROP:", @[prop]
 
+        onClick: (e) ->
+            @getValues()
+            return false
+
         getValues: ->
-            res = @_form.getValues()
-            console.log res
+            form = @$el.find(@formSelector)[0]
+            res = @_form.getValues(form)
+            console.log "RESULT:::", res

@@ -11,6 +11,7 @@ define({
       template: {
         $ref: 'clientFormTpl'
       },
+      formSelector: ".edit-client-data-view",
       _form: {
         $ref: 'form'
       }

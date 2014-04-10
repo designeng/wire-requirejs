@@ -58,6 +58,11 @@ require.config
             name: "backbone.collectionbinder"
             main: "Backbone.CollectionBinder"
             location: "../../bower_components/Backbone.ModelBinder"
+        },
+        {
+            name: "Bacon"
+            main: "bacon"
+            location: "../../bower_components/bacon/dist/bacon.min"
         }, 
         # {
         #     name: "keysviewmixin"
