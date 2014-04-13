@@ -65,6 +65,14 @@ require.config({
       name: "listenTo",
       main: "listenTo",
       location: "../../bower_components/listenTo"
+    }, {
+      name: "css",
+      main: "css",
+      location: "../../bower_components/require-css"
+    }, {
+      name: "domReady",
+      main: "domReady",
+      location: "../../bower_components/requirejs-domready"
     }
   ],
   shim: {
@@ -83,12 +91,12 @@ require.config({
     }
   },
   paths: {
-    "domReady": "../../bower_components/domReady/domReady",
     "bootstrapSpec": "specs/bootstrapSpec",
     "childSpec": "specs/childSpec",
     "listenToSpec": "specs/listenToSpec",
     "extenderPluginSpec": "specs/extenderPluginSpec",
     "clientDataSpec": "modules/clientdata/clientDataSpec",
+    "sampleAppSpec": "sample-app/main",
     "mediator": "boot/mediator",
     "context/main": "withwire/context/main",
     "oneComponent": "withwire/components/oneComponent"

@@ -43,6 +43,18 @@ module.exports = (grunt) ->
                     ext: '.js'
                 ]
 
+        js2coffee:
+            each:
+                options:
+                    indent: "    "
+                files: [
+                    expand: true
+                    cwd: 'sample-app'
+                    src: ['**/*.js']
+                    dest: 'sample-app/coffee/'
+                    ext: '.coffee'
+                ]
+
         copy:
             app:
                 files: [
@@ -92,6 +104,7 @@ module.exports = (grunt) ->
 
     grunt.loadNpmTasks "grunt-contrib-watch"
     grunt.loadNpmTasks "grunt-contrib-coffee"
+    grunt.loadNpmTasks "grunt-js2coffee"
     grunt.loadNpmTasks "grunt-contrib-copy"
     grunt.loadNpmTasks "grunt-contrib-clean"
     grunt.loadNpmTasks "grunt-contrib-connect"

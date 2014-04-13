@@ -5,12 +5,14 @@ require [
     "listenToSpec"
     "extenderPluginSpec"
     "clientDataSpec"
+    "sampleAppSpec"
     "overridden"
-], (wire, bootstrapCTX, childSpec, listenToSpec, extenderPluginSpec, clientDataSpec) ->
+], (wire, bootstrapCTX, childSpec, listenToSpec, extenderPluginSpec, clientDataSpec, sampleAppSpec) ->
 
     bootstrapCTX.wire(
-            clientDataSpec
+            sampleAppSpec
+            # clientDataSpec
             # listenToSpec
             # extenderPluginSpec
     ).then (childContext) ->
-        console.log "resultCTX:", childContext
+        console.log "resultCTX::::", childContext

@@ -1,7 +1,6 @@
 {
   "name": "wire-requirejs",
-  "scripts": {
-  },
+  "scripts": {},
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-connect": "~0.6.0",
@@ -11,6 +10,7 @@
     "grunt-contrib-copy": "~0.4.1",
     "grunt-contrib-clean": "~0.4.1",
     "grunt-contrib-requirejs": "~0.4.1",
-    "grunt-contrib-concat": ""
+    "grunt-contrib-concat": "",
+    "grunt-js2coffee": "~0.2.1"
   }
 }

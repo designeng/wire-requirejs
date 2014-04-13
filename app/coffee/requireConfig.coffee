@@ -58,12 +58,7 @@ require.config
             name: "backbone.collectionbinder"
             main: "Backbone.CollectionBinder"
             location: "../../bower_components/Backbone.ModelBinder"
-        }, 
-        # {
-        #     name: "keysviewmixin"
-        #     main: "backbone.keys.mixin"
-        #     location: "../../bower_components/keysviewmixin"
-        # },
+        },
         {
             name: "mousetrap"
             main: "mousetrap"
@@ -88,6 +83,17 @@ require.config
             name: "listenTo"
             main: "listenTo"
             location: "../../bower_components/listenTo"
+        },
+        # requirejs plugins, analog curl plugins
+        {
+            name: "css"
+            main: "css"
+            location: "../../bower_components/require-css"
+        },
+        {
+            name: "domReady"
+            main: "domReady"
+            location: "../../bower_components/requirejs-domready"
         }     
     ]
 
@@ -104,8 +110,6 @@ require.config
 
 
     paths:
-        # plugins
-        "domReady": "../../bower_components/domReady/domReady"
 
         # specs
         "bootstrapSpec": "specs/bootstrapSpec"
@@ -113,6 +117,7 @@ require.config
         "listenToSpec": "specs/listenToSpec"
         "extenderPluginSpec": "specs/extenderPluginSpec"
         "clientDataSpec": "modules/clientdata/clientDataSpec"
+        "sampleAppSpec": "sample-app/main"
 
         # mediator
         "mediator": "boot/mediator"
