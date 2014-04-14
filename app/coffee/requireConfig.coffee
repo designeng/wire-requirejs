@@ -19,10 +19,15 @@ require.config
             main: "meld"
             location: "../../bower_components/meld"
         },
+        # {
+        #     name: "cola"
+        #     main: "cola"
+        #     location: "../../bower_components/cola"
+        # },
         {
             name: "cola"
             main: "cola"
-            location: "../../bower_components/cola"
+            location: "../../cola"
         },
         {
             name: "rest"

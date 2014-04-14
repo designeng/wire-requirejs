@@ -19,6 +19,10 @@ define(function() {
         property: 'firstName',
         message: 'missing'
       });
+      result.classes.push({
+        property: 'firstName',
+        "class": "errorFirst"
+      });
     }
     valid = contact && 'lastName' in contact && contact.lastName.trim();
     if (!valid) {

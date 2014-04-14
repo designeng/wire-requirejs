@@ -11,11 +11,14 @@ module.exports = (grunt) ->
             coffee_jasmine:
                 files: ['test/jasmine/coffee/**/**.coffee']
                 tasks: ["coffee-compile-jasmine"]
+            coffee_cola:
+                files: ['cola-ext/coffee/**/**.coffee']
+                tasks: ["coffee-compile-cola"]
             js_requireConfig:
                 files: ["app/js/requireConfig.js", "app/js/main.js", "test/jasmine/SpecRunner.js"]
                 tasks: ["concat:main", "concat:jasmine"]
             js:
-                files: ["app/js/**/**.js", "test/jasmine/js/**/**.js"]
+                files: ["app/js/**/**.js", "test/jasmine/js/**/**.js", "cola/**/**.js"]
                 options:
                     livereload: true
 
@@ -42,16 +45,28 @@ module.exports = (grunt) ->
                     dest: 'test/jasmine/js',
                     ext: '.js'
                 ]
+            cola:
+                options: {
+                    bare: true
+                }
+                files: [
+                    expand: true,
+                    cwd: 'cola-ext/coffee',
+                    src: ['**/*.coffee'],
+                    dest: 'cola-ext',
+                    ext: '.js'
+                ]
 
         js2coffee:
             each:
                 options:
                     indent: "    "
+                    no_comments: false
                 files: [
                     expand: true
-                    cwd: 'sample-app'
+                    cwd: 'cola'
                     src: ['**/*.js']
-                    dest: 'sample-app/coffee/'
+                    dest: 'cola-ext/coffee/'
                     ext: '.coffee'
                 ]
 
@@ -117,6 +132,7 @@ module.exports = (grunt) ->
     # compilation
     grunt.registerTask "coffee-compile-app", ["newer:coffee:app"]
     grunt.registerTask "coffee-compile-jasmine", ["newer:coffee:jasmine"]
+    grunt.registerTask "coffee-compile-cola", ["newer:coffee:cola"]
 
     grunt.registerTask "server", ["connect"]
     

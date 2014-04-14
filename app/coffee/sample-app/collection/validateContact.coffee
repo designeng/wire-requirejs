@@ -16,6 +16,9 @@ define ->
             result.errors.push
                 property: 'firstName'
                 message: 'missing'
+            result.classes.push
+                property: 'firstName'
+                class: "errorFirst"
 
         valid = contact and 'lastName' of contact and contact.lastName.trim()
         unless valid

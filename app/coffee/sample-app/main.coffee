@@ -5,6 +5,10 @@ define # Wire spec
     contactsCollection:
         wire: 'sample-app/collection/spec'
 
+    # test formModel binding
+    formModel:
+        wire: 'sample-app/test-model/spec'
+
     controller:
         create: 'sample-app/controller'
         properties:
@@ -32,6 +36,7 @@ define # Wire spec
 
         on:
             submit: 'form.getValues | contactsCollection.update'
+            # submit: 'form.getValues | formModel.update | controller.logModel'
 
         connect:
             'contactsCollection.onChange': 'reset'
@@ -41,7 +46,7 @@ define # Wire spec
             template:
                 module: 'text!sample-app/list/template.html'
             css:
-                module: 'css!contacts/app/list/structure.css'
+                module: 'css!sample-app/list/structure.css'
 
 
         insert:
@@ -56,6 +61,7 @@ define # Wire spec
         bind:
             to:
                 $ref: 'contactsCollection'
+                # $ref: 'formModel'
 
             comparator:
                 module: 'sample-app/list/compareByLastFirst'

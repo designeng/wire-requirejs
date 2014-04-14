@@ -5,6 +5,9 @@ define({
   contactsCollection: {
     wire: 'sample-app/collection/spec'
   },
+  formModel: {
+    wire: 'sample-app/test-model/spec'
+  },
   controller: {
     create: 'sample-app/controller',
     properties: {
@@ -44,7 +47,7 @@ define({
         module: 'text!sample-app/list/template.html'
       },
       css: {
-        module: 'css!contacts/app/list/structure.css'
+        module: 'css!sample-app/list/structure.css'
       }
     },
     insert: {

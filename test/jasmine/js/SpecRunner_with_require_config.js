@@ -16,7 +16,7 @@ require.config({
     }, {
       name: "cola",
       main: "cola",
-      location: "../../bower_components/cola"
+      location: "../../cola"
     }, {
       name: "rest",
       main: "rest",
