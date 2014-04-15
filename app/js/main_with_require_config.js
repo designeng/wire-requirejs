@@ -16,7 +16,7 @@ require.config({
     }, {
       name: "cola",
       main: "cola",
-      location: "../../cola"
+      location: "../../bower_components/cola"
     }, {
       name: "rest",
       main: "rest",
@@ -113,6 +113,7 @@ require.config({
     "clientDataSpec": "modules/clientdata/clientDataSpec",
     "sampleAppSpec": "sample-app/main",
     "modelToViewInjectionSpec": "modules/modelToViewInjection/modelToViewInjectionSpec",
+    "routerMainSpec": "specs/routerMainSpec",
     "mediator": "boot/mediator",
     "context/main": "withwire/context/main",
     "oneComponent": "withwire/components/oneComponent"
@@ -122,8 +123,10 @@ require.config({
 
 console.time("startApp");
 
-require(["wire", "wire!bootstrapSpec", "modelToViewInjectionSpec", "overridden"], function(wire, bootstrapCTX, childSpec) {
-  return bootstrapCTX.wire(childSpec).then(function(childContext) {
+require(["when", "wire", "wire!bootstrapSpec", "routerMainSpec", "modelToViewInjectionSpec", "overridden"], function(When, wire, bootstrapCTX, routerMainSpec, childSpec) {
+  var app;
+  app = bootstrapCTX.bootApp;
+  return bootstrapCTX.wire(routerMainSpec).then(function(childContext) {
     console.timeEnd("startApp");
     return console.log("resultCTX::::", childContext);
   });

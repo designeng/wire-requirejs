@@ -36,7 +36,6 @@ define # Wire spec
 
         on:
             submit: 'form.getValues | contactsCollection.update'
-            # submit: 'form.getValues | formModel.update | controller.logModel'
 
         connect:
             'contactsCollection.onChange': 'reset'
@@ -79,5 +78,5 @@ define # Wire spec
         'wire/on'
         'wire/connect'
         'cola'
-        # 'wire/debug'
+        'wire/debug'
     ]

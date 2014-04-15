@@ -31,8 +31,6 @@ define
             to: {$ref: 'collection'}
             bindings:
                 selector: ".tbody"
-        # bind:
-        #     to: {$ref: 'collection'}
 
     headerView:
         create:

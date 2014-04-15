@@ -16,7 +16,7 @@ require.config({
     }, {
       name: "cola",
       main: "cola",
-      location: "../../cola"
+      location: "../../bower_components/cola"
     }, {
       name: "rest",
       main: "rest",
@@ -113,6 +113,7 @@ require.config({
     "clientDataSpec": "modules/clientdata/clientDataSpec",
     "sampleAppSpec": "sample-app/main",
     "modelToViewInjectionSpec": "modules/modelToViewInjection/modelToViewInjectionSpec",
+    "routerMainSpec": "specs/routerMainSpec",
     "mediator": "boot/mediator",
     "context/main": "withwire/context/main",
     "oneComponent": "withwire/components/oneComponent"

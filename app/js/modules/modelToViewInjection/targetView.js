@@ -29,10 +29,6 @@ define(["marionette"], function(Marionette) {
       return this;
     };
 
-    TargetView.prototype.logProp = function(prop) {
-      return console.log("____PROP::::::::", this[prop]);
-    };
-
     return TargetView;
 
   })(Marionette.Layout);

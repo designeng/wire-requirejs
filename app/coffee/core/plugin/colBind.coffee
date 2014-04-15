@@ -13,6 +13,8 @@ define [
         #     , (error) ->
         #         console.error error.stack
 
+        collectionBinders = []
+
         doBind = (facet, options, wire) ->
             target = facet.target
 
@@ -34,6 +36,8 @@ define [
                         rowHtml = "<tr><td data-name='one'></td><td data-name='two'></td></tr>"
                         elManagerFactory = new Backbone.CollectionBinder.ElManagerFactory(rowHtml, "data-name")
                         collectionBinder = new Backbone.CollectionBinder(elManagerFactory, {autoSort: true})
+
+                        collectionBinders.push collectionBinder
                         
                         selector = bindings.selector
                         element = target.$el.find(selector)
@@ -42,6 +46,10 @@ define [
                         
                         return target
                 )
+    
+        removeAll = (targets) ->
+            for target in targets
+                target.unbind()
 
         bindFacet = (resolver, facet, wire) ->
             resolver.resolve(doBind(facet, options, wire))
@@ -49,10 +57,13 @@ define [
         context:
             ready: (resolver, wire) ->
                 resolver.resolve()
+            destroy: (resolver, wire) ->
+                for colBinder in collectionBinders
+                    colBinder.unbind()
 
-        # TODO: We need to decide what to do with a route is detroyed
-        destroy: {}
+                resolver.resolve()
+
 
         facets: 
-            bind: 
+            bind:
                 ready: bindFacet

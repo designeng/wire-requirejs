@@ -1,6 +1,7 @@
 define(["marionette", "when", "backbone.collectionbinder"], function(Marionette, When) {
   return function(options) {
-    var bindFacet, doBind;
+    var bindFacet, collectionBinders, doBind, removeAll;
+    collectionBinders = [];
     doBind = function(facet, options, wire) {
       var target;
       target = facet.target;
@@ -21,11 +22,21 @@ define(["marionette", "when", "backbone.collectionbinder"], function(Marionette,
         collectionBinder = new Backbone.CollectionBinder(elManagerFactory, {
           autoSort: true
         });
+        collectionBinders.push(collectionBinder);
         selector = bindings.selector;
         element = target.$el.find(selector);
         collectionBinder.bind(to, element);
         return target;
       });
+    };
+    removeAll = function(targets) {
+      var target, _i, _len, _results;
+      _results = [];
+      for (_i = 0, _len = targets.length; _i < _len; _i++) {
+        target = targets[_i];
+        _results.push(target.unbind());
+      }
+      return _results;
     };
     bindFacet = function(resolver, facet, wire) {
       return resolver.resolve(doBind(facet, options, wire));
@@ -34,9 +45,16 @@ define(["marionette", "when", "backbone.collectionbinder"], function(Marionette,
       context: {
         ready: function(resolver, wire) {
           return resolver.resolve();
+        },
+        destroy: function(resolver, wire) {
+          var colBinder, _i, _len;
+          for (_i = 0, _len = collectionBinders.length; _i < _len; _i++) {
+            colBinder = collectionBinders[_i];
+            colBinder.unbind();
+          }
+          return resolver.resolve();
         }
       },
-      destroy: {},
       facets: {
         bind: {
           ready: bindFacet

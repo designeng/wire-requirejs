@@ -1,7 +1,9 @@
 console.time("startApp")
 require [
+    "when"
     "wire"
     "wire!bootstrapSpec"
+    "routerMainSpec"
     # "clientDataSpec"
     # "childSpec"
     # "listenToSpec"
@@ -9,10 +11,11 @@ require [
     # "sampleAppSpec"
     "modelToViewInjectionSpec"
     "overridden"
-# ], (wire, bootstrapCTX, clientDataSpec, childSpec, listenToSpec, extenderPluginSpec, sampleAppSpec) ->
-], (wire, bootstrapCTX, childSpec) ->
+], (When, wire, bootstrapCTX, routerMainSpec, childSpec) ->
+    app = bootstrapCTX.bootApp
+
     bootstrapCTX.wire(
-            childSpec
+            routerMainSpec
     ).then (childContext) ->
         console.timeEnd("startApp")
         console.log "resultCTX::::", childContext

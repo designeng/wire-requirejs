@@ -19,16 +19,16 @@ require.config
             main: "meld"
             location: "../../bower_components/meld"
         },
-        # {
-        #     name: "cola"
-        #     main: "cola"
-        #     location: "../../bower_components/cola"
-        # },
         {
             name: "cola"
             main: "cola"
-            location: "../../cola"
+            location: "../../bower_components/cola"
         },
+        # {
+        #     name: "cola"
+        #     main: "cola"
+        #     location: "../../cola"
+        # },
         {
             name: "rest"
             main: "rest"
@@ -139,6 +139,7 @@ require.config
         "clientDataSpec": "modules/clientdata/clientDataSpec"
         "sampleAppSpec": "sample-app/main"
         "modelToViewInjectionSpec": "modules/modelToViewInjection/modelToViewInjectionSpec"
+        "routerMainSpec": "specs/routerMainSpec"
 
         # mediator
         "mediator": "boot/mediator"

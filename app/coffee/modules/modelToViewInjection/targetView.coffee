@@ -17,6 +17,3 @@ define [
 
         show: ->
             return @
-
-        logProp: (prop) ->
-            console.log "____PROP::::::::", @[prop]
