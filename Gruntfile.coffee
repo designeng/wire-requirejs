@@ -92,12 +92,12 @@ module.exports = (grunt) ->
         requirejs:
             compile:
                 options:
-                    appDir: "app"
+                    appDir: "prebuild"
                     baseUrl: "js"
-                    mainConfigFile: "app/js/main.js"
+                    mainConfigFile: "prebuild/js/requireConfig.js"
                     dir: "public"
 
-                    optimize: "none"
+                    optimize: "uglify"
                     removeCombined: true
 
                     paths:
@@ -105,13 +105,16 @@ module.exports = (grunt) ->
 
                     modules: [
                         name: "main"
-                        include: ["main", "wire", 'wire/lib/context']
+                        include: ["main"]
                     ]
 
         concat:
             main:
                 src: ["app/js/requireConfig.js", "app/js/main.js"]
                 dest: "app/js/main_with_require_config.js"
+            prebuild:
+                src: ["prebuild/js/requireConfig.js", "prebuild/js/main.js"]
+                dest: "prebuild/js/main.js"
             jasmine:
                 src: ["app/js/requireConfig.js", "test/jasmine/js/SpecRunner.js"]
                 dest: "test/jasmine/js/SpecRunner_with_require_config.js"
@@ -136,6 +139,20 @@ module.exports = (grunt) ->
 
     grunt.registerTask "server", ["connect"]
     
-    grunt.registerTask 'build', ["prebuild", "requirejs", "afterbuild"]
+    grunt.registerTask 'build', ["prebuild", "rewriteIndexAndRJSConfig", "concat:prebuild", "requirejs", "afterbuild", "default"]
     grunt.registerTask 'prebuild', ["copy:app"]
     grunt.registerTask 'afterbuild', ["clean:prebuild"]
+
+    grunt.registerTask "rewriteIndexAndRJSConfig", () ->
+        grunt.log.write "Start rewrite index..."
+        content = grunt.file.read "prebuild/index.html", {encoding: "utf-8"}
+        content = content.replace /app\/js/g, "public/js"
+        content = content.replace /main_with_require_config/g, "main"
+        grunt.file.write "prebuild/index.html", content
+        grunt.log.write "OK"
+
+        grunt.log.write "Start rewrite config..."
+        content = grunt.file.read "prebuild/js/requireConfig.js", {encoding: "utf-8"}
+        content = content.replace /app\/js/, "public/js"
+        grunt.file.write "prebuild/js/requireConfig.js", content
+        grunt.log.write "OK"

@@ -79,5 +79,5 @@ define # Wire spec
         'wire/on'
         'wire/connect'
         'cola'
-        'wire/debug'
+        # 'wire/debug'
     ]

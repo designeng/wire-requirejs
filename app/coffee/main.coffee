@@ -1,18 +1,18 @@
+console.time("startApp")
 require [
     "wire"
     "wire!bootstrapSpec"
-    "childSpec"
-    "listenToSpec"
-    "extenderPluginSpec"
-    "clientDataSpec"
-    "sampleAppSpec"
+    # "clientDataSpec"
+    # "childSpec"
+    # "listenToSpec"
+    # "extenderPluginSpec"
+    # "sampleAppSpec"
+    "modelToViewInjectionSpec"
     "overridden"
-], (wire, bootstrapCTX, childSpec, listenToSpec, extenderPluginSpec, clientDataSpec, sampleAppSpec) ->
-
+# ], (wire, bootstrapCTX, clientDataSpec, childSpec, listenToSpec, extenderPluginSpec, sampleAppSpec) ->
+], (wire, bootstrapCTX, childSpec) ->
     bootstrapCTX.wire(
-            sampleAppSpec
-            # clientDataSpec
-            # listenToSpec
-            # extenderPluginSpec
+            childSpec
     ).then (childContext) ->
+        console.timeEnd("startApp")
         console.log "resultCTX::::", childContext

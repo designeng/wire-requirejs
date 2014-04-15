@@ -16,6 +16,11 @@
     "underscore.string": "~2.3.3",
     "requirejs-i18n": "~2.0.4",
     "requirejs-domready": "~2.0.1",
-    "require-css": "~0.1.2"
+    "require-css": "~0.1.2",
+    "backbone.wreqr": "~1.2.0",
+    "backbone.babysitter": "~0.1.1"
+  },
+  "resolutions": {
+    "backbone.wreqr": "~1.2.0"
   }
 }

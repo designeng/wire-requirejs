@@ -21,17 +21,19 @@
             <input type="text" name="documentNumber">
         </label>
         <label>
-            <!-- срок действия -->
             <span>${validity}</span>
             <input type="submit" value="${chooseDate}" name="validity">
-            <!-- / срок действия -->
+        </label>
+        <label class="dropdown">
+            <span>Dropdown view</span>
+            <input type="hidden" value="Paris" name="town">
+            <input type="text" name="time" value="Spring">
         </label>
         <label>
             <span>${loyaltyCardAirlines}</span>
             <input type="text" name="loyaltyCardAirlines">
         </label>
         <label>
-            <!-- срок действия -->
             <input type="submit" value="${save}" name="save">
         </label>
     </fieldset>

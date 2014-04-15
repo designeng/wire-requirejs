@@ -36,11 +36,19 @@ require.config({
     }, {
       name: "marionette",
       main: "backbone.marionette",
-      location: "../../bower_components/marionette/lib"
+      location: "../../bower_components/marionette/lib/core/amd"
     }, {
       name: "backbone.modelbinder",
       main: "Backbone.ModelBinder",
       location: "../../bower_components/Backbone.ModelBinder"
+    }, {
+      name: "backbone.wreqr",
+      main: "backbone.wreqr",
+      location: "../../bower_components/backbone.wreqr/lib/amd"
+    }, {
+      name: "backbone.babysitter",
+      main: "backbone.babysitter",
+      location: "../../bower_components/backbone.babysitter/lib/amd"
     }, {
       name: "backbone.collectionbinder",
       main: "Backbone.CollectionBinder",
@@ -76,15 +84,22 @@ require.config({
     }
   ],
   shim: {
+    "backbone": {
+      deps: ["underscore", "jquery"],
+      exports: "Backbone"
+    },
+    "backbone.wreqr": {
+      deps: ["backbone"]
+    },
+    "backbone.babysitter": {
+      deps: ["backbone"]
+    },
     "marionette": {
-      deps: ["backbone"],
+      deps: ["jquery", "underscore", "backbone"],
       exports: "Marionette"
     },
     "backbone.collectionbinder": {
       deps: ["backbone.modelbinder"]
-    },
-    backbone: {
-      deps: ["underscore", "jquery"]
     },
     "underscore.string": {
       deps: ["underscore"]
@@ -97,6 +112,7 @@ require.config({
     "extenderPluginSpec": "specs/extenderPluginSpec",
     "clientDataSpec": "modules/clientdata/clientDataSpec",
     "sampleAppSpec": "sample-app/main",
+    "modelToViewInjectionSpec": "modules/modelToViewInjection/modelToViewInjectionSpec",
     "mediator": "boot/mediator",
     "context/main": "withwire/context/main",
     "oneComponent": "withwire/components/oneComponent"

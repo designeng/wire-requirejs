@@ -76,5 +76,5 @@ define({
   form: {
     module: 'cola/dom/form'
   },
-  $plugins: ['wire/dom', 'wire/dom/render', 'wire/on', 'wire/connect', 'cola', 'wire/debug']
+  $plugins: ['wire/dom', 'wire/dom/render', 'wire/on', 'wire/connect', 'cola']
 });

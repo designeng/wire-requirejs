@@ -4,11 +4,10 @@ define(["appinstance", "core/modules/root/rootModule"], function(App, rootModule
     if (!options.regionSelector) {
       throw new Error("Application region not specified!");
     }
-    App.addRegions({
+    return App.addRegions({
       root: options.regionSelector,
       tableRegion: "#table"
     });
-    return console.log("App.tableRegion", App.tableRegion);
   });
   App.getRegionManager = function() {
     return this._regionManager;

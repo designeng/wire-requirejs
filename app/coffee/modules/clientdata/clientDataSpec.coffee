@@ -1,6 +1,7 @@
 define
     $plugins: [
         "wire/debug"
+        "wire/dom"
         "wire/dom/render"
         "wire/on"
         "wire/connect"
@@ -20,18 +21,30 @@ define
 
         properties:
             template: {$ref: 'clientFormTpl'}
-            _form: {$ref: 'form'}
+            # _form: {$ref: 'form'}
 
         localize: "template"
 
         # just a rendering in bootApp... hack, must be redesigned - way must be improved
         ready:
             "show": {$ref:'clientEditView'}
-            "log" : "_form"
-            "getValues": {}
+            # "getValues": {}
         connect:
             'show': 'bootApp.showView'
 
+    dropDownTpl:
+        # { $ref: 'first!.dropdown', at: { $ref: 'clientFormTpl' } }
+        clone: 
+            $ref: 'first!.dropdown'
+
+    dropDownView:
+        create: "modules/clientdata/dropDownView"
+
+        properties:
+            template: {$ref: 'dropDownTpl'}
+        ready:
+            "logProp": "template"
+
     # herpers
-    form: 
-        module: 'cola/dom/form'
+    # form: 
+    #     module: 'cola/dom/form'
