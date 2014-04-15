@@ -11,6 +11,9 @@ module.exports = (grunt) ->
             coffee_jasmine:
                 files: ['test/jasmine/coffee/**/**.coffee']
                 tasks: ["coffee-compile-jasmine"]
+            coffee_cola:
+                files: ['cola-ext/coffee/**/**.coffee']
+                tasks: ["coffee-compile-cola"]
             js_requireConfig:
                 files: ["app/js/requireConfig.js", "app/js/main.js", "test/jasmine/SpecRunner.js"]
                 tasks: ["concat:main", "concat:jasmine"]
@@ -40,6 +43,17 @@ module.exports = (grunt) ->
                     cwd: 'test/jasmine/coffee',
                     src: ['**/*.coffee'],
                     dest: 'test/jasmine/js',
+                    ext: '.js'
+                ]
+            cola:
+                options: {
+                    bare: true
+                }
+                files: [
+                    expand: true,
+                    cwd: 'cola-ext/coffee',
+                    src: ['**/*.coffee'],
+                    dest: 'cola-ext',
                     ext: '.js'
                 ]
 
