@@ -1,4 +1,4 @@
-define(["appinstance", "overridden"], function(App) {
+define(["core/appinstance", "overridden"], function(App) {
   App.addInitializer(function(options) {
     console.log("App.addInitializer", options);
     if (!options.regionSelector) {

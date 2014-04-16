@@ -14,13 +14,8 @@ define(["when", "marionette", "underscore", "core/bootApp"], function(When, Mari
 
     Normalized.prototype.template = "<div/>";
 
-    Normalized.prototype.initialize = function(options) {
-      return this.node = options.node;
-    };
-
     Normalized.prototype.onRender = function() {
-      this.$el.append(this.node);
-      return this.trigger("rendered");
+      return this.$el.append(Marionette.getOption(this, "node"));
     };
 
     return Normalized;

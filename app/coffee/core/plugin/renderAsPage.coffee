@@ -13,12 +13,8 @@ define [
 
     class Normalized extends Marionette.Layout
         template: "<div/>"
-        initialize: (options) ->
-            @node = options.node
-
         onRender: ->
-            @$el.append(@node)
-            @trigger "rendered"
+            @$el.append(Marionette.getOption @, "node")
 
     return (options) ->
 
