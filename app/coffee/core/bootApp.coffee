@@ -1,7 +1,7 @@
 define [
     "appinstance"
-    "core/modules/root/rootModule"
-], (App, rootModule) ->
+    "overridden"
+], (App) ->
 
     App.addInitializer (options) ->
         console.log "App.addInitializer", options
@@ -12,6 +12,7 @@ define [
             root: options.regionSelector
             tableRegion: "#table"
 
+
     App.getRegionManager = () ->
         @_regionManager
 
@@ -21,8 +22,5 @@ define [
     App.showView = (view) ->
         @.tableRegion.show view
         return view
-
-    App.log = (msg) ->
-        console.log "LOG"
 
     return App

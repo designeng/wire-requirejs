@@ -1,4 +1,4 @@
-define(["appinstance", "core/modules/root/rootModule"], function(App, rootModule) {
+define(["appinstance", "overridden"], function(App) {
   App.addInitializer(function(options) {
     console.log("App.addInitializer", options);
     if (!options.regionSelector) {
@@ -18,9 +18,6 @@ define(["appinstance", "core/modules/root/rootModule"], function(App, rootModule
   App.showView = function(view) {
     this.tableRegion.show(view);
     return view;
-  };
-  App.log = function(msg) {
-    return console.log("LOG");
   };
   return App;
 });
