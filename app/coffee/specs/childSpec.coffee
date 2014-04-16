@@ -3,8 +3,7 @@ define
         "wire/debug"
         "wire/connect"
         "core/plugin/colBind"
-        "core/plugin/renderAsPage"
-        # "core/plugin/colToColBind"
+        "core/plugin/renderAs"
     ]
 
     $exports:
@@ -16,11 +15,11 @@ define
 
     collection:
         create:
-            module: "controls/testcontrol/collection/tableBodyCollection"
+            module: "controls/tablecontrol/collection/tableBodyCollection"
 
     tableView:
         create:
-            module: "controls/testcontrol/tableControl"
+            module: "controls/tablecontrol/tableControl"
         properties:
             header: {$ref: 'headerView'}
             body: {$ref: 'bodyView'}
@@ -28,13 +27,13 @@ define
             to: {$ref: 'collection'}
             bindings:
                 selector: ".tbody"
-        renderAsPage: true
+        renderAsRoot: true
 
     headerView:
         create:
-            module: "controls/testcontrol/tableHeaderControl"
+            module: "controls/tablecontrol/tableHeaderControl"
 
     bodyView:
         create:
-            module: "controls/testcontrol/tableBodyControl"
+            module: "controls/tablecontrol/tableBodyControl"
 

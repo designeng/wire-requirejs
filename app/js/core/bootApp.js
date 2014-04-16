@@ -20,7 +20,7 @@ define(["core/appinstance", "overridden"], function(App) {
     this.tableRegion.show(view);
     return view;
   };
-  App.renderAsPage = function(view) {
+  App.renderAsRoot = function(view) {
     return this.pageRegion.show(view);
   };
   return App;

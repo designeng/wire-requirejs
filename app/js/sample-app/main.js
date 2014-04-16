@@ -1,5 +1,5 @@
 define({
-  $plugins: ['wire/dom', 'wire/dom/render', 'wire/on', 'wire/connect', 'cola', "core/plugin/renderAsPage", 'wire/debug'],
+  $plugins: ['wire/dom', 'wire/dom/render', 'wire/on', 'wire/connect', 'cola', "core/plugin/renderAs", 'wire/debug'],
   contactsCollection: {
     wire: 'sample-app/collection/spec'
   },
@@ -35,7 +35,7 @@ define({
     connect: {
       'contactsCollection.onChange': 'reset'
     },
-    renderAsColumn: true
+    renderAsChild: true
   },
   listView: {
     render: {
@@ -62,7 +62,7 @@ define({
         lastName: '.last-name'
       }
     },
-    renderAsPage: true
+    renderAsRoot: true
   },
   form: {
     module: 'cola/dom/form'

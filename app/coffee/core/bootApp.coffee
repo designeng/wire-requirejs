@@ -24,7 +24,7 @@ define [
         @.tableRegion.show view
         return view
 
-    App.renderAsPage = (view) ->
+    App.renderAsRoot = (view) ->
         @pageRegion.show view
 
     return App

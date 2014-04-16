@@ -2,7 +2,7 @@ define
     $plugins: [
         "wire/debug"
         "wire/connect"
-        "core/plugin/renderAsPage"
+        "core/plugin/renderAs"
     ]
 
     injModel:
@@ -15,4 +15,4 @@ define
         properties:
             model: {$ref: 'injModel'}
 
-        renderAsPage: true
+        renderAsRoot: true

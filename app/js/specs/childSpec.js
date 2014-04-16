@@ -1,5 +1,5 @@
 define({
-  $plugins: ["wire/debug", "wire/connect", "core/plugin/colBind", "core/plugin/renderAsPage"],
+  $plugins: ["wire/debug", "wire/connect", "core/plugin/colBind", "core/plugin/renderAs"],
   $exports: {
     tableModule: {
       $ref: 'controller'
@@ -12,12 +12,12 @@ define({
   },
   collection: {
     create: {
-      module: "controls/testcontrol/collection/tableBodyCollection"
+      module: "controls/tablecontrol/collection/tableBodyCollection"
     }
   },
   tableView: {
     create: {
-      module: "controls/testcontrol/tableControl"
+      module: "controls/tablecontrol/tableControl"
     },
     properties: {
       header: {
@@ -35,16 +35,16 @@ define({
         selector: ".tbody"
       }
     },
-    renderAsPage: true
+    renderAsRoot: true
   },
   headerView: {
     create: {
-      module: "controls/testcontrol/tableHeaderControl"
+      module: "controls/tablecontrol/tableHeaderControl"
     }
   },
   bodyView: {
     create: {
-      module: "controls/testcontrol/tableBodyControl"
+      module: "controls/tablecontrol/tableBodyControl"
     }
   }
 });

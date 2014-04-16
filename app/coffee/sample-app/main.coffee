@@ -6,7 +6,7 @@ define # Wire spec
         'wire/on'
         'wire/connect'
         'cola'
-        "core/plugin/renderAsPage"
+        "core/plugin/renderAs"
         'wire/debug'
     ]
 
@@ -42,7 +42,7 @@ define # Wire spec
         connect:
             'contactsCollection.onChange': 'reset'
 
-        renderAsColumn: true
+        renderAsChild: true
 
     listView:
         render:
@@ -67,7 +67,7 @@ define # Wire spec
                 firstName: '.first-name'
                 lastName: '.last-name'
 
-        renderAsPage: true
+        renderAsRoot: true
 
     form:
         module: 'cola/dom/form'

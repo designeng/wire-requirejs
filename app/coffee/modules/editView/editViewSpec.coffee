@@ -4,7 +4,7 @@ define
         'wire/dom'
         'wire/dom/render'
         'wire/on'
-        "core/plugin/renderAsPage"
+        "core/plugin/renderAs"
         'wire/debug'
     ]
 
@@ -15,4 +15,4 @@ define
             css: 
                 module: 'css!sample-app/edit/structure.css'
 
-        renderAsPage: true
+        renderAsRoot: true
