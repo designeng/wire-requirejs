@@ -35,9 +35,6 @@ define({
     connect: {
       'contactsCollection.onChange': 'reset'
     },
-    insert: {
-      after: 'listView'
-    },
     renderAsColumn: true
   },
   listView: {

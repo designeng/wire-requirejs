@@ -53,7 +53,9 @@ define(["when", "marionette", "underscore", "core/bootApp"], function(When, Mari
         pageView.addRegion("column" + count + "Region", ".column" + count);
         pageView["column" + count + "Region"].show(columnView);
         return count++;
-      }, function(error) {});
+      }).otherwise(function(error) {
+        throw "pageView does not resolved, did you assigned renderAsPage component?";
+      });
     };
     renderAsPageFacet = function(resolver, facet, wire) {
       return resolver.resolve(doRenderAsPage(facet, options, wire));

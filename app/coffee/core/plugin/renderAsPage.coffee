@@ -43,15 +43,17 @@ define [
 
             columnView = normalizeView columnView
 
-            When(pageViewDeferred.promise).then(
+            return When(pageViewDeferred.promise).then(
                 (pageView) ->
-                    # not inead, but works
+                    # not ideal, but works
                     $("<div class='column#{count}'></div>").appendTo(pageView.el)
                     pageView.addRegion "column#{count}Region", ".column#{count}"
                     pageView["column#{count}Region"].show columnView
                     count++
-
-                , (error) ->
+            ).otherwise(
+                # does not work as error throw
+                (error) ->
+                    throw "pageView does not resolved, did you assigned renderAsPage component?"
             )
 
         renderAsPageFacet = (resolver, facet, wire) ->
