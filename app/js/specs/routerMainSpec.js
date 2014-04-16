@@ -4,6 +4,7 @@ define({
     bbRouter: {
       routes: {
         "main": "childSpec",
+        "sample": "sample-app/main",
         "else": "modelToViewInjectionSpec"
       }
     }

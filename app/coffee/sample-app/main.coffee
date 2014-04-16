@@ -1,6 +1,14 @@
 define # Wire spec
 
-    root: { $ref: 'dom.first!#sample-app' }
+    $plugins: [
+        'wire/dom'
+        'wire/dom/render'
+        'wire/on'
+        'wire/connect'
+        'cola'
+        "core/plugin/renderAsPage"
+        'wire/debug'
+    ]
 
     contactsCollection:
         wire: 'sample-app/collection/spec'
@@ -28,17 +36,16 @@ define # Wire spec
             css: 
                 module: 'css!sample-app/edit/structure.css'
 
-            # replace:
-            #     module: 'i18n!sample-app/edit/strings'
-
-        insert:
-            after: 'listView'
-
         on:
             submit: 'form.getValues | contactsCollection.update'
 
         connect:
             'contactsCollection.onChange': 'reset'
+
+        insert:
+            after: 'listView'
+
+        renderAsColumn: true
 
     listView:
         render:
@@ -46,12 +53,6 @@ define # Wire spec
                 module: 'text!sample-app/list/template.html'
             css:
                 module: 'css!sample-app/list/structure.css'
-
-
-        insert:
-            first:
-                $ref: 'dom.first!.contacts-view-container'
-                at: 'root'
 
         on:
             'click:.contact': 'contactsCollection.edit'
@@ -69,14 +70,7 @@ define # Wire spec
                 firstName: '.first-name'
                 lastName: '.last-name'
 
+        renderAsPage: true
+
     form:
         module: 'cola/dom/form'
-
-    $plugins: [
-        'wire/dom'
-        'wire/dom/render'
-        'wire/on'
-        'wire/connect'
-        'cola'
-        'wire/debug'
-    ]

@@ -9,5 +9,6 @@ define
         bbRouter: 
             routes:
                 "main"  : "childSpec"
-                # "new"   : "sampleAppSpec"
+                # "sample"   : "editViewSpec"
+                "sample"   : "sample-app/main"
                 "else"  : "modelToViewInjectionSpec"

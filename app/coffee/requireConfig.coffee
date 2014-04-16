@@ -139,6 +139,7 @@ require.config
         "clientDataSpec": "modules/clientdata/clientDataSpec"
         "sampleAppSpec": "sample-app/main"
         "modelToViewInjectionSpec": "modules/modelToViewInjection/modelToViewInjectionSpec"
+        "editViewSpec": "modules/editView/editViewSpec"
         "routerMainSpec": "specs/routerMainSpec"
 
         # mediator
