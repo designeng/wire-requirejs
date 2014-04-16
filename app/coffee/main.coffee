@@ -2,7 +2,9 @@ require [
     "wire"
     "wire!bootstrapSpec"
     "routerMainSpec"
-], (wire, routerMainSpec) ->
+], (wire, bootstrapCTX, routerMainSpec) ->
 
-    wire()
-
+    bootstrapCTX.wire(
+        routerMainSpec
+    ).then (resultCTX) ->
+        console.log "resultCTX::::", resultCTX

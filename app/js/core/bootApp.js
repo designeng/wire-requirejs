@@ -6,6 +6,7 @@ define(["appinstance", "overridden"], function(App) {
     }
     return App.addRegions({
       root: options.regionSelector,
+      pageRegion: "#page",
       tableRegion: "#table"
     });
   });
@@ -18,6 +19,9 @@ define(["appinstance", "overridden"], function(App) {
   App.showView = function(view) {
     this.tableRegion.show(view);
     return view;
+  };
+  App.renderAsPage = function(view) {
+    return this.pageRegion.show(view);
   };
   return App;
 });

@@ -10,6 +10,7 @@ define [
 
         App.addRegions 
             root: options.regionSelector
+            pageRegion: "#page"
             tableRegion: "#table"
 
 
@@ -22,5 +23,8 @@ define [
     App.showView = (view) ->
         @.tableRegion.show view
         return view
+
+    App.renderAsPage = (view) ->
+        @pageRegion.show view
 
     return App

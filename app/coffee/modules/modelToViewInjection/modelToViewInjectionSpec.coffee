@@ -2,6 +2,7 @@ define
     $plugins: [
         "wire/debug"
         "wire/connect"
+        "core/plugin/renderAsPage"
     ]
 
     injModel:
@@ -14,8 +15,4 @@ define
         properties:
             model: {$ref: 'injModel'}
 
-        # just a rendering in bootApp... hack, must be redesigned - way must be improved
-        ready:
-            "show": {$ref:'targetView'}
-        connect:
-            'show': 'bootApp.showView'
+        renderAsPage: true

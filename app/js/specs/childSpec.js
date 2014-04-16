@@ -1,5 +1,5 @@
 define({
-  $plugins: ["wire/debug", "wire/connect", "core/plugin/colBind"],
+  $plugins: ["wire/debug", "wire/connect", "core/plugin/colBind", "core/plugin/renderAsPage"],
   $exports: {
     tableModule: {
       $ref: 'controller'
@@ -27,14 +27,6 @@ define({
         $ref: 'bodyView'
       }
     },
-    ready: {
-      "show": {
-        $ref: 'tableView'
-      }
-    },
-    connect: {
-      'show': 'bootApp.showView'
-    },
     bind: {
       to: {
         $ref: 'collection'
@@ -42,7 +34,8 @@ define({
       bindings: {
         selector: ".tbody"
       }
-    }
+    },
+    renderAsPage: true
   },
   headerView: {
     create: {

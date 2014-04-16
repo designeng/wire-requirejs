@@ -3,6 +3,7 @@ define
         "wire/debug"
         "wire/connect"
         "core/plugin/colBind"
+        "core/plugin/renderAsPage"
         # "core/plugin/colToColBind"
     ]
 
@@ -23,14 +24,11 @@ define
         properties:
             header: {$ref: 'headerView'}
             body: {$ref: 'bodyView'}
-        ready:
-            "show": {$ref:'tableView'}
-        connect: 
-            'show': 'bootApp.showView'
         bind:
             to: {$ref: 'collection'}
             bindings:
                 selector: ".tbody"
+        renderAsPage: true
 
     headerView:
         create:

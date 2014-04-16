@@ -1,5 +1,5 @@
 define({
-  $plugins: ["wire/debug", "wire/connect"],
+  $plugins: ["wire/debug", "wire/connect", "core/plugin/renderAsPage"],
   injModel: {
     create: "modules/modelToViewInjection/injModel"
   },
@@ -12,13 +12,6 @@ define({
         $ref: 'injModel'
       }
     },
-    ready: {
-      "show": {
-        $ref: 'targetView'
-      }
-    },
-    connect: {
-      'show': 'bootApp.showView'
-    }
+    renderAsPage: true
   }
 });
